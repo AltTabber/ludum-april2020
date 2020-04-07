@@ -5,14 +5,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.units.Player;
 
 public class LudumRogue extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+
+	Player player;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+
+		player.init(batch);
 	}
 
 	@Override
