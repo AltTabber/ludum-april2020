@@ -18,6 +18,10 @@ public class LudumRogue extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
+		GameController.getInstance().getAssetController().loadPlayerAssets();
+		GameController.getInstance().getAssetManager().finishLoading();
+
+		player = new Player();
 		player.init(batch);
 	}
 
@@ -26,12 +30,14 @@ public class LudumRogue extends ApplicationAdapter {
 //		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+
+		player.draw();
+
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }

@@ -16,12 +16,12 @@ public class AssetManagerController {
         return assetManager;
     }
 
-    public void loadPlayerAsset(){
-        assetManager.load("front.png", Texture.class);
-        assetManager.load("12.png", Texture.class);
-        assetManager.load("34behind.png", Texture.class);
-        assetManager.load("34front.png", Texture.class);
-        assetManager.load("behind.png", Texture.class);
+    public void loadPlayerAssets(){
+        assetManager.load(Assets.frontTexture, Texture.class);
+        assetManager.load(Assets.sideTexture, Texture.class);
+        assetManager.load(Assets.sideBehindTexture, Texture.class);
+        assetManager.load(Assets.sideFrontTexture, Texture.class);
+        assetManager.load(Assets.behindTexture, Texture.class);
     }
 }
 
