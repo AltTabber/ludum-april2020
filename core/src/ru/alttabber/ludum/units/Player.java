@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.units;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -20,12 +21,18 @@ public class Player extends Unit {
     Sprite rightSprite;
     Sprite upSprite;
     Sprite downSprite;
+    Sprite upLeftSprite;
+    Sprite upRightSprite;
+    Sprite downLeftSprite;
+    Sprite downRightSprite;
 
     Sprite sprite;
 
     PlayerInput input = PlayerInput.IDLE;
 
     int counter = 0;
+    
+    int speed = 300;
 
     public Player() {
         super();
@@ -51,6 +58,14 @@ public class Player extends Unit {
         this.upSprite = createScaledSprite(behindTexture);
         this.downSprite = createScaledSprite(frontTexture);
 
+        this.upRightSprite = createScaledSprite(sideBehindTexture);
+        this.upLeftSprite = createScaledSprite(sideBehindTexture);
+        this.upLeftSprite.flip(true, false);
+        this.downRightSprite = createScaledSprite(sideFrontTexture);
+        this.downLeftSprite = createScaledSprite(sideFrontTexture);
+        this.downLeftSprite.flip(true, false);
+
+
         this.sprite = this.downSprite;
 
         this.batch = batch;
@@ -58,26 +73,52 @@ public class Player extends Unit {
 
     @Override
     public void draw() {
-        sprite.setPosition(this.x, this.y);
         this.sprite.draw(batch);
         this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
-        this.changeTextureByInput(this.input);
+        this.doActionByInput(this.input);
         this.input = PlayerInput.IDLE;
+        sprite.setPosition(this.x, this.y);
     }
 
-    public void changeTextureByInput(PlayerInput input){
+    public void doActionByInput(PlayerInput input){
         switch (input) {
             case UP:
                 sprite = this.upSprite;
+                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
                 break;
             case DOWN:
                 sprite = this.downSprite;
+                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
                 break;
             case RIGHT:
                 sprite = this.rightSprite;
+                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
                 break;
             case LEFT:
                 sprite = this.leftSprite;
+                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
+                break;
+            case UPLEFT:
+                sprite = this.upLeftSprite;
+                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
+                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                break;
+            case UPRIGHT:
+                sprite = this.upRightSprite;
+                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
+                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                break;
+            case DOWNLEFT:
+                sprite = this.downLeftSprite;
+                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
+                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                break;
+            case DOWNRIGHT:
+                sprite = this.downRightSprite;
+                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
+                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                break;
+            case IDLE:
                 break;
         }
     }

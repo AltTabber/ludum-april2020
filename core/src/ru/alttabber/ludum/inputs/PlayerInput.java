@@ -5,5 +5,9 @@ public enum PlayerInput {
     UP,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT,
+    UPLEFT,
+    UPRIGHT,
+    DOWNLEFT,
+    DOWNRIGHT
 }

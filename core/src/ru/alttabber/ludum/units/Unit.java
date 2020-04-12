@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public abstract class Unit {
 
-    protected int x;
-    protected int y;
+    protected float x;
+    protected float y;
     protected int height;
     protected int width;
     protected Batch batch;
@@ -20,8 +20,8 @@ public abstract class Unit {
         return createScaledSprite(texture, this.x, this.y, this.width, this.height);
     }
 
-    public Sprite createScaledSprite(Texture texture, int x, int y, int width, int height){
-        Sprite sprite = new Sprite(texture, x, y, texture.getWidth(), texture.getHeight());
+    public Sprite createScaledSprite(Texture texture, float x, float y, int width, int height){
+        Sprite sprite = new Sprite(texture, (int) x, (int) y, texture.getWidth(), texture.getHeight());
         sprite.setSize(width, height);
 
         return sprite;
