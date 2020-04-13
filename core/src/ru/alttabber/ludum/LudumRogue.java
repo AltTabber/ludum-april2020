@@ -9,6 +9,7 @@ import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.units.Player;
 
 public class LudumRogue extends ApplicationAdapter {
+
 	SpriteBatch batch;
 	Texture img;
 
@@ -23,6 +24,8 @@ public class LudumRogue extends ApplicationAdapter {
 
 		player = new Player();
 		player.init(batch);
+
+		GameController.getInstance().setPlayer(player);
 	}
 
 	@Override

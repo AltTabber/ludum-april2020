@@ -7,28 +7,31 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.ui.Inventory;
 
 public class Player extends Unit {
 
-    Texture behindTexture;
-    Texture frontTexture;
-    Texture sideTexture;
-    Texture sideFrontTexture;
-    Texture sideBehindTexture;
-    Texture currentTexture;
+    private Texture behindTexture;
+    private Texture frontTexture;
+    private Texture sideTexture;
+    private Texture sideFrontTexture;
+    private Texture sideBehindTexture;
+    private Texture currentTexture;
 
-    Sprite leftSprite;
-    Sprite rightSprite;
-    Sprite upSprite;
-    Sprite downSprite;
-    Sprite upLeftSprite;
-    Sprite upRightSprite;
-    Sprite downLeftSprite;
-    Sprite downRightSprite;
+    private Sprite leftSprite;
+    private Sprite rightSprite;
+    private Sprite upSprite;
+    private Sprite downSprite;
+    private Sprite upLeftSprite;
+    private Sprite upRightSprite;
+    private Sprite downLeftSprite;
+    private Sprite downRightSprite;
 
-    Sprite sprite;
+    private Sprite sprite;
 
-    PlayerInput input = PlayerInput.IDLE;
+    private PlayerInput input = PlayerInput.IDLE;
+
+    private Inventory inventory;
 
     int counter = 0;
     
@@ -73,11 +76,12 @@ public class Player extends Unit {
 
     @Override
     public void draw() {
-        this.sprite.draw(batch);
         this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
         this.doActionByInput(this.input);
-        this.input = PlayerInput.IDLE;
         sprite.setPosition(this.x, this.y);
+        this.sprite.draw(batch);
+
+        this.input = PlayerInput.IDLE;
     }
 
     public void doActionByInput(PlayerInput input){
@@ -123,5 +127,11 @@ public class Player extends Unit {
         }
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 }
