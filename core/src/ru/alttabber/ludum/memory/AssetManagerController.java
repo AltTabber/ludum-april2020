@@ -23,5 +23,9 @@ public class AssetManagerController {
         assetManager.load(Assets.sideFrontTexture, Texture.class);
         assetManager.load(Assets.behindTexture, Texture.class);
     }
+
+    public void loadItems(){
+        assetManager.load(Assets.swordTexture, Texture.class);
+    }
 }
 

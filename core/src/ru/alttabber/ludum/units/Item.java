@@ -3,22 +3,15 @@ package ru.alttabber.ludum.units;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import ru.alttabber.ludum.abstracts.GameObject;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 
-public class Item implements MapUsableObject {
+public class Item extends GameObject implements MapUsableObject {
 
     protected String name;
     protected Texture texture;
     protected Sprite sprite;
-
-    protected Batch batch;
-
-    protected float x;
-    protected float y;
-
-    protected float width;
-    protected float height;
 
     @Override
     public void doMapAction() {

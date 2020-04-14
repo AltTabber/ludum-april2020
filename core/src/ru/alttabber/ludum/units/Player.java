@@ -52,8 +52,8 @@ public class Player extends Unit {
         sideBehindTexture = GameController.getInstance().getAssetManager().get(Assets.sideBehindTexture);
         currentTexture = frontTexture;
 
-        this.x = 0;
-        this.y = 0;
+        this.x = 400;
+        this.y = 400;
 
         this.leftSprite = createScaledSprite(sideTexture);
         this.leftSprite.flip(true, false);
