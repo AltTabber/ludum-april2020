@@ -2,6 +2,7 @@ package ru.alttabber.ludum;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,11 +31,6 @@ public class LudumRogue extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		barManager = new BarManager();
-		barManager.addNewBar(new HitBar());
-		barManager.addNewBar(new ManaBar());
-		shapeRenderer = new ShapeRenderer();
-
 		GameController.getInstance().getAssetController().loadPlayerAssets();
 		GameController.getInstance().getAssetController().loadItems();
 		GameController.getInstance().getAssetManager().finishLoading();
@@ -45,10 +41,16 @@ public class LudumRogue extends ApplicationAdapter {
 		player = new Player();
 		player.init(batch);
 
+		barManager = new BarManager();
+		barManager.addNewBar(new HitBar(player.getHits()));
+		barManager.addNewBar(new ManaBar());
+		shapeRenderer = new ShapeRenderer();
+
 		GameController.getInstance().setPlayer(player);
 
 		item = new SwordItem();
 		item.init(batch);
+
 	}
 
 	@Override

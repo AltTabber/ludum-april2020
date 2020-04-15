@@ -48,6 +48,7 @@ public class Assets {
                     "player/frontside_0003.png"
             };
 
+    public static final String footStep = "sound/footStep.wav";
     public static final String swordTexture = "sword.png";
 
 }

@@ -1,6 +1,7 @@
 package ru.alttabber.ludum.units;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -33,6 +34,8 @@ public class Player extends Unit {
     private SpriteAnimation behindAnimation;
     private float animationTime = 0;
 
+    private Sound footStep;
+
     private Sprite sprite;
 
     private PlayerInput input = PlayerInput.IDLE;
@@ -47,6 +50,7 @@ public class Player extends Unit {
         super();
         this.height = 200;
         this.width = 200;
+        this.hits = 100;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class Player extends Unit {
         sideFrontTexture = GameController.getInstance().getAssetManager().get(Assets.sideFrontTexture);
         sideBehindTexture = GameController.getInstance().getAssetManager().get(Assets.sideBehindTexture);
         currentTexture = frontTexture;
+        footStep = GameController.getInstance().getAssetManager().get(Assets.footStep);
 
         this.x = 400;
         this.y = 400;
@@ -138,6 +143,10 @@ public class Player extends Unit {
                 animationTime = 0;
                 break;
         }
+    }
+
+    public void makeFootStepSound(){
+        footStep.play();
     }
 
     public Inventory getInventory() {
