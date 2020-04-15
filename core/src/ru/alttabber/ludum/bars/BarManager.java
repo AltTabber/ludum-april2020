@@ -1,5 +1,7 @@
 package ru.alttabber.ludum.bars;
 
+import ru.alttabber.ludum.window.Window;
+
 import java.util.ArrayList;
 
 public class BarManager {
@@ -21,7 +23,7 @@ public class BarManager {
     }
 
     public int getYOfBar(int num){
-        return  getYOfBar( num,480, 20);
+        return  getYOfBar( num, Window.getHeight(), 20);
     }
 
     public int getYOfBar(int numInList, int maxY, int hight){
