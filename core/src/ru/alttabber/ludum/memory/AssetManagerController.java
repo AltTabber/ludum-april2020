@@ -2,6 +2,7 @@ package ru.alttabber.ludum.memory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class AssetManagerController {
@@ -22,6 +23,7 @@ public class AssetManagerController {
         assetManager.load(Assets.sideBehindTexture, Texture.class);
         assetManager.load(Assets.sideFrontTexture, Texture.class);
         assetManager.load(Assets.behindTexture, Texture.class);
+        assetManager.load(Assets.footStep, Sound.class);
     }
 
     public void loadItems(){
