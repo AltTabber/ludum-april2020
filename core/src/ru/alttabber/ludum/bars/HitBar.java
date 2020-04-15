@@ -1,4 +1,4 @@
-package ru.alttabber.ludum.Bars;
+package ru.alttabber.ludum.bars;
 
 public class HitBar extends Bar {
     public HitBar(){
