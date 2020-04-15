@@ -2,12 +2,14 @@ package ru.alttabber.ludum.units;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.ui.Inventory;
+import ru.alttabber.ludum.utils.SpriteAnimation;
 
 public class Player extends Unit {
 
@@ -27,6 +29,10 @@ public class Player extends Unit {
     private Sprite downLeftSprite;
     private Sprite downRightSprite;
 
+    private SpriteAnimation frontAnimation;
+    private SpriteAnimation behindAnimation;
+    private float animationTime = 0;
+
     private Sprite sprite;
 
     private PlayerInput input = PlayerInput.IDLE;
@@ -35,7 +41,7 @@ public class Player extends Unit {
 
     int counter = 0;
     
-    int speed = 300;
+    int speed = 400;
 
     public Player() {
         super();
@@ -68,6 +74,10 @@ public class Player extends Unit {
         this.downLeftSprite = createScaledSprite(sideFrontTexture);
         this.downLeftSprite.flip(true, false);
 
+        this.frontAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
+        this.behindAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
+
+
 
         this.sprite = this.downSprite;
 
@@ -87,11 +97,13 @@ public class Player extends Unit {
     public void doActionByInput(PlayerInput input){
         switch (input) {
             case UP:
-                sprite = this.upSprite;
+                this.sprite = this.behindAnimation.getKeyFrame(animationTime);
+                this.animationTime += Gdx.graphics.getDeltaTime();
                 this.y = this.y + speed * Gdx.graphics.getDeltaTime();
                 break;
             case DOWN:
-                sprite = this.downSprite;
+                this.sprite = this.frontAnimation.getKeyFrame(animationTime);
+                this.animationTime += Gdx.graphics.getDeltaTime();
                 this.y = this.y - speed * Gdx.graphics.getDeltaTime();
                 break;
             case RIGHT:
@@ -123,6 +135,7 @@ public class Player extends Unit {
                 this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case IDLE:
+                animationTime = 0;
                 break;
         }
     }

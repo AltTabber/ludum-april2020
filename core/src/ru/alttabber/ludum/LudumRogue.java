@@ -10,8 +10,10 @@ import ru.alttabber.ludum.bars.BarManager;
 import ru.alttabber.ludum.bars.HitBar;
 import ru.alttabber.ludum.bars.ManaBar;
 import ru.alttabber.ludum.items.SwordItem;
+import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.units.Player;
+import ru.alttabber.ludum.utils.SpriteAnimation;
 
 public class LudumRogue extends ApplicationAdapter {
 
@@ -22,6 +24,7 @@ public class LudumRogue extends ApplicationAdapter {
 
 	Player player;
 	SwordItem item;
+	SpriteAnimation animation;
 	
 	@Override
 	public void create () {
@@ -35,6 +38,9 @@ public class LudumRogue extends ApplicationAdapter {
 		GameController.getInstance().getAssetController().loadPlayerAssets();
 		GameController.getInstance().getAssetController().loadItems();
 		GameController.getInstance().getAssetManager().finishLoading();
+
+		animation = new SpriteAnimation(Assets.frontTextureAnimation, 200,200);
+		animation.init(batch);
 
 		player = new Player();
 		player.init(batch);
@@ -52,6 +58,8 @@ public class LudumRogue extends ApplicationAdapter {
 		batch.begin();
 		item.draw();
 		player.draw();
+
+		animation.draw();
 
 		batch.end();
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
