@@ -41,6 +41,7 @@ public class Player extends Unit {
         super();
         this.height = 200;
         this.width = 200;
+        this.hits = 100;
     }
 
     @Override
