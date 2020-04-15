@@ -27,17 +27,17 @@ public class LudumRogue extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		barManager = new BarManager();
-		barManager.addNewBar(new HitBar(player.getHits()));
-		barManager.addNewBar(new ManaBar());
-		shapeRenderer = new ShapeRenderer();
-
 		GameController.getInstance().getAssetController().loadPlayerAssets();
 		GameController.getInstance().getAssetController().loadItems();
 		GameController.getInstance().getAssetManager().finishLoading();
 
 		player = new Player();
 		player.init(batch);
+
+		barManager = new BarManager();
+		barManager.addNewBar(new HitBar(player.getHits()));
+		barManager.addNewBar(new ManaBar());
+		shapeRenderer = new ShapeRenderer();
 
 		GameController.getInstance().setPlayer(player);
 
