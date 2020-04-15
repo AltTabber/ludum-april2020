@@ -104,23 +104,23 @@ public class Player extends Unit {
                 break;
             case UPLEFT:
                 sprite = this.upLeftSprite;
-                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
-                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
+                this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
                 break;
             case UPRIGHT:
                 sprite = this.upRightSprite;
-                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
-                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case DOWNLEFT:
                 sprite = this.downLeftSprite;
-                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
-                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case DOWNRIGHT:
                 sprite = this.downRightSprite;
-                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
-                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case IDLE:
                 break;
