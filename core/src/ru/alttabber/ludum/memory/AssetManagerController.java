@@ -22,10 +22,23 @@ public class AssetManagerController {
         assetManager.load(Assets.sideBehindTexture, Texture.class);
         assetManager.load(Assets.sideFrontTexture, Texture.class);
         assetManager.load(Assets.behindTexture, Texture.class);
+
+        loadAnimationArray(Assets.frontTextureAnimation);
+        loadAnimationArray(Assets.behindTextureAnimation);
+        loadAnimationArray(Assets.sideTextureAnimation);
+        loadAnimationArray(Assets.frontsideTextureAnimation);
+        loadAnimationArray(Assets.behindsideTextureAnimation);
+
     }
 
     public void loadItems(){
         assetManager.load(Assets.swordTexture, Texture.class);
+    }
+
+    private void loadAnimationArray(String[] array){
+        for(String path: array){
+            assetManager.load(path, Texture.class);
+        }
     }
 }
 
