@@ -24,7 +24,7 @@ public abstract class GameObject {
         Sprite sprite = new Sprite(texture, 0, 0, texture.getWidth(), texture.getHeight());
         sprite.setSize(width, height);
 
-        return sprite;
+        return sprite;//sdfsdfsdf
     }
 
 
