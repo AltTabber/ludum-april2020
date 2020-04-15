@@ -28,7 +28,7 @@ public class LudumRogue extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		barManager = new BarManager();
-		barManager.addNewBar(new HitBar());
+		barManager.addNewBar(new HitBar(player.getHits()));
 		barManager.addNewBar(new ManaBar());
 		shapeRenderer = new ShapeRenderer();
 
