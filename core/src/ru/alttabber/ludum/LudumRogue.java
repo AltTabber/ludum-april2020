@@ -5,6 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import ru.alttabber.ludum.bars.BarManager;
+import ru.alttabber.ludum.bars.HitBar;
+import ru.alttabber.ludum.bars.ManaBar;
 import ru.alttabber.ludum.items.SwordItem;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.units.Player;
@@ -13,6 +17,8 @@ public class LudumRogue extends ApplicationAdapter {
 
 	SpriteBatch batch;
 	Texture img;
+	BarManager barManager;
+	ShapeRenderer shapeRenderer;
 
 	Player player;
 	SwordItem item;
@@ -20,6 +26,11 @@ public class LudumRogue extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+
+		barManager = new BarManager();
+		barManager.addNewBar(new HitBar());
+		barManager.addNewBar(new ManaBar());
+		shapeRenderer = new ShapeRenderer();
 
 		GameController.getInstance().getAssetController().loadPlayerAssets();
 		GameController.getInstance().getAssetController().loadItems();
@@ -43,6 +54,14 @@ public class LudumRogue extends ApplicationAdapter {
 		player.draw();
 
 		batch.end();
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		for (int i = 0; i < barManager.getNumbOfBars(); i++) {
+			shapeRenderer.setColor(barManager.getBarList().get(i).getEmptyColor());
+			shapeRenderer.rect(barManager.getStartX(), barManager.getYOfBar(i), barManager.getBarList().get(i).getMaxLength(), barManager.getBarList().get(i).getHight());
+			shapeRenderer.setColor(barManager.getBarList().get(i).getColor());
+			shapeRenderer.rect(barManager.getStartX(), barManager.getYOfBar(i), barManager.getBarList().get(i).getLength(), barManager.getBarList().get(i).getHight());
+		}
+		shapeRenderer.end();
 	}
 	
 	@Override
