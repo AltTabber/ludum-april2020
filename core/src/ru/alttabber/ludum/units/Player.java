@@ -197,7 +197,7 @@ public class Player extends Unit {
                 nowGo = false;
                 break;
         }
-        if((footStepTime > 0.5f)&&(nowGo))
+        if((footStepTime > 0.4f)&&(nowGo))
         {
             footStep.play();
             footStepTime = 0f;
