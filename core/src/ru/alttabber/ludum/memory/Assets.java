@@ -18,34 +18,34 @@ public class Assets {
 
     public static final String[] behindTextureAnimation =
             {
-                    "player/behind_0000.png",
                     "player/behind_0001.png",
                     "player/behind_0002.png",
-                    "player/behind_0003.png"
+                    "player/behind_0003.png",
+                    "player/behind_0000.png"
             };
 
     public static final String[] sideTextureAnimation =
             {
-                    "player/side_0000.png",
                     "player/side_0001.png",
                     "player/side_0002.png",
-                    "player/side_0003.png"
+                    "player/side_0003.png",
+                    "player/side_0000.png"
             };
 
-    public static final String[] frontsideTextureAnimation =
+    public static final String[] frontSideTextureAnimation =
             {
-                    "player/frontside_0000.png",
                     "player/frontside_0001.png",
                     "player/frontside_0002.png",
-                    "player/frontside_0003.png"
+                    "player/frontside_0003.png",
+                    "player/frontside_0000.png"
             };
 
-    public static final String[] behindsideTextureAnimation =
+    public static final String[] behindSideTextureAnimation =
             {
-                    "player/frontside_0000.png",
-                    "player/frontside_0001.png",
-                    "player/frontside_0002.png",
-                    "player/frontside_0003.png"
+                    "player/behindside_0001.png",
+                    "player/behindside_0002.png",
+                    "player/behindside_0003.png",
+                    "player/behindside_0000.png"
             };
 
     public static final String footStep = "sound/footStep.wav";

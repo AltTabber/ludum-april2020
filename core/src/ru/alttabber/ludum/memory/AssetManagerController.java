@@ -1,6 +1,5 @@
 package ru.alttabber.ludum.memory;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,8 +27,8 @@ public class AssetManagerController {
         loadAnimationArray(Assets.frontTextureAnimation);
         loadAnimationArray(Assets.behindTextureAnimation);
         loadAnimationArray(Assets.sideTextureAnimation);
-        loadAnimationArray(Assets.frontsideTextureAnimation);
-        loadAnimationArray(Assets.behindsideTextureAnimation);
+        loadAnimationArray(Assets.frontSideTextureAnimation);
+        loadAnimationArray(Assets.behindSideTextureAnimation);
 
     }
 

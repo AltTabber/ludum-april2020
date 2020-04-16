@@ -12,6 +12,7 @@ import ru.alttabber.ludum.memory.GameController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SpriteAnimation extends GameObject {
 
@@ -42,12 +43,26 @@ public class SpriteAnimation extends GameObject {
 
     }
 
+    public void transformSprites(Consumer<Sprite> transformation){
+        for(Sprite sprite : animation.getKeyFrames()){
+            transformation.accept(sprite);
+        }
+    }
+
     public void setFrameDuration(float frameDuration){
         animation.setFrameDuration(frameDuration);
     }
 
+    public Animation<Sprite> getAnimation() {
+        return animation;
+    }
+
     public Sprite getKeyFrame(float time){
         return animation.getKeyFrame(time, true);
+    }
+
+    public float getFrameDuration() {
+        return animation.getFrameDuration();
     }
 
     @Override

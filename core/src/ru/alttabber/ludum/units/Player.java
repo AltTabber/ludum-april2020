@@ -3,7 +3,6 @@ package ru.alttabber.ludum.units;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import ru.alttabber.ludum.inputs.PlayerInput;
@@ -30,8 +29,15 @@ public class Player extends Unit {
     private Sprite downLeftSprite;
     private Sprite downRightSprite;
 
-    private SpriteAnimation frontAnimation;
-    private SpriteAnimation behindAnimation;
+    private SpriteAnimation upAnimation;
+    private SpriteAnimation downAnimation;
+    private SpriteAnimation rightAnimation;
+    private SpriteAnimation leftAnimation;
+    private SpriteAnimation upRightAnimation;
+    private SpriteAnimation upLeftAnimation;
+    private SpriteAnimation downRightAnimation;
+    private SpriteAnimation downLeftAnimation;
+    private SpriteAnimation currentAnimation;
     private float animationTime = 0;
 
     private Sound footStep;
@@ -79,9 +85,26 @@ public class Player extends Unit {
         this.downLeftSprite = createScaledSprite(sideFrontTexture);
         this.downLeftSprite.flip(true, false);
 
-        this.frontAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
-        this.behindAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
+        this.upAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
+        this.downAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
+        this.rightAnimation = new SpriteAnimation(Assets.sideTextureAnimation, this.width, this.height);
+        this.upRightAnimation = new SpriteAnimation(Assets.behindSideTextureAnimation, this.width, this.height);
+        this.downRightAnimation = new SpriteAnimation(Assets.frontSideTextureAnimation, this.width, this.height);
 
+        this.leftAnimation = new SpriteAnimation(Assets.sideTextureAnimation, this.width, this.height);
+        this.leftAnimation.transformSprites(animationSprite -> {
+            animationSprite.flip(true,false);
+        });
+        this.upLeftAnimation = new SpriteAnimation(Assets.behindSideTextureAnimation, this.width, this.height);
+        this.upLeftAnimation.transformSprites(animationSprite -> {
+            animationSprite.flip(true,false);
+        });
+        this.downLeftAnimation = new SpriteAnimation(Assets.frontSideTextureAnimation, this.width, this.height);
+        this.downLeftAnimation.transformSprites(animationSprite -> {
+            animationSprite.flip(true,false);
+        });
+
+        this.currentAnimation = this.downAnimation;
 
 
         this.sprite = this.downSprite;
@@ -100,47 +123,56 @@ public class Player extends Unit {
     }
 
     public void doActionByInput(PlayerInput input){
+        this.animationTime += Gdx.graphics.getDeltaTime();
         switch (input) {
             case UP:
-                this.sprite = this.behindAnimation.getKeyFrame(animationTime);
-                this.animationTime += Gdx.graphics.getDeltaTime();
+                this.currentAnimation = this.downAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.y = this.y + speed * Gdx.graphics.getDeltaTime();
                 break;
             case DOWN:
-                this.sprite = this.frontAnimation.getKeyFrame(animationTime);
-                this.animationTime += Gdx.graphics.getDeltaTime();
+                this.currentAnimation = this.upAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.y = this.y - speed * Gdx.graphics.getDeltaTime();
                 break;
             case RIGHT:
-                sprite = this.rightSprite;
+                this.currentAnimation = this.rightAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = this.x + speed * Gdx.graphics.getDeltaTime();
                 break;
             case LEFT:
-                sprite = this.leftSprite;
+                this.currentAnimation = this.leftAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = this.x - speed * Gdx.graphics.getDeltaTime();
                 break;
             case UPLEFT:
-                sprite = this.upLeftSprite;
+                this.currentAnimation = this.upLeftAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
                 this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
                 break;
             case UPRIGHT:
-                sprite = this.upRightSprite;
+                this.currentAnimation = this.upRightAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case DOWNLEFT:
-                sprite = this.downLeftSprite;
+                this.currentAnimation = this.downLeftAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case DOWNRIGHT:
-                sprite = this.downRightSprite;
+                this.currentAnimation = this.downRightAnimation;
+                this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 break;
             case IDLE:
                 animationTime = 0;
+                Sprite[] frames =  this.currentAnimation.getAnimation().getKeyFrames();
+                this.sprite = frames[frames.length - 1];
                 break;
         }
     }
