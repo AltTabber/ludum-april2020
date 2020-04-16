@@ -48,6 +48,9 @@ public class Player extends Unit {
 
     private Inventory inventory;
 
+    float footStepTime = 1f;
+    boolean nowGo = false;
+
     int counter = 0;
     
     int speed = 400;
@@ -57,6 +60,7 @@ public class Player extends Unit {
         this.height = 200;
         this.width = 200;
         this.hits = 100;
+
     }
 
     @Override
@@ -129,51 +133,74 @@ public class Player extends Unit {
                 this.currentAnimation = this.downAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case DOWN:
                 this.currentAnimation = this.upAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case RIGHT:
                 this.currentAnimation = this.rightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = this.x + speed * Gdx.graphics.getDeltaTime();
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case LEFT:
                 this.currentAnimation = this.leftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = this.x - speed * Gdx.graphics.getDeltaTime();
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case UPLEFT:
                 this.currentAnimation = this.upLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
                 this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case UPRIGHT:
                 this.currentAnimation = this.upRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/1.41);
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case DOWNLEFT:
                 this.currentAnimation = this.downLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case DOWNRIGHT:
                 this.currentAnimation = this.downRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
                 this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
+                nowGo = true;
                 break;
             case IDLE:
                 animationTime = 0;
                 Sprite[] frames =  this.currentAnimation.getAnimation().getKeyFrames();
                 this.sprite = frames[frames.length - 1];
+                footStepTime = 1f;
+                nowGo = false;
                 break;
+        }
+        if((footStepTime > 0.5f)&&(nowGo))
+        {
+            footStep.play();
+            footStepTime = 0f;
         }
     }
 
