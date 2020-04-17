@@ -34,7 +34,7 @@ public class Player extends Unit {
     private SpriteAnimation currentAnimation;
     private float animationTime = 0;
 
-    private Vector2 prevXY;
+    private Vector2 nextXY;
 
     private Sound footStep;
 
@@ -76,7 +76,7 @@ public class Player extends Unit {
         this.XY.x = 400;
         this.XY.y = 400;
 
-        this.prevXY = new Vector2(XY.x, XY.y);
+        this.nextXY = new Vector2(XY.x, XY.y);
 
         this.upAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
         this.downAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
@@ -115,13 +115,13 @@ public class Player extends Unit {
         this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
         this.doActionByInput(this.input);
         refreshCollisionRect();
-        if(!GameController.getInstance().getCollisionController().isMovementPossible()){
-            this.XY.x = this.prevXY.x;
-            this.XY.y = this.prevXY.y;
+        nextXY.x = this.XY.x + speed * Gdx.graphics.getDeltaTime() * this.movementVector.x;
+        nextXY.y = this.XY.y + speed * Gdx.graphics.getDeltaTime() * this.movementVector.y;
+        if(GameController.getInstance().getCollisionController().isMovementPossible(getCollisionCircleByCoord(nextXY))){
+            this.XY.x = this.nextXY.x;
+            this.XY.y = this.nextXY.y;
         }
         sprite.setPosition(this.XY.x, this.XY.y);
-        this.prevXY.x = this.XY.x;
-        this.prevXY.y = this.XY.y;
         this.sprite.draw(batch);
 
         this.input = PlayerInput.IDLE;
@@ -133,7 +133,6 @@ public class Player extends Unit {
             case UP:
                 this.currentAnimation = this.downAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.y = this.XY.y + speed * Gdx.graphics.getDeltaTime();
                 this.movementVector.y = 1;
                 this.movementVector.x = 0;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -142,7 +141,6 @@ public class Player extends Unit {
             case DOWN:
                 this.currentAnimation = this.upAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.y = this.XY.y - speed * Gdx.graphics.getDeltaTime();
                 this.movementVector.y = -1;
                 this.movementVector.x = 0;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -151,7 +149,6 @@ public class Player extends Unit {
             case RIGHT:
                 this.currentAnimation = this.rightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = this.XY.x + speed * Gdx.graphics.getDeltaTime();
                 this.movementVector.y = 0;
                 this.movementVector.x = 1;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -160,7 +157,6 @@ public class Player extends Unit {
             case LEFT:
                 this.currentAnimation = this.leftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = this.XY.x - speed * Gdx.graphics.getDeltaTime();
                 this.movementVector.y = 0;
                 this.movementVector.x = -1;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -169,18 +165,14 @@ public class Player extends Unit {
             case UPLEFT:
                 this.currentAnimation = this.upLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = (int)(this.XY.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
-                this.XY.y = (int)(this.XY.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
-                this.movementVector.y = -0.7f;
-                this.movementVector.x = 0.7f;
+                this.movementVector.y = 0.7f;
+                this.movementVector.x = -0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case UPRIGHT:
                 this.currentAnimation = this.upRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = (int)(this.XY.x + speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.XY.y = (int)(this.XY.y + speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.movementVector.y = 0.7f;
                 this.movementVector.x = 0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -189,8 +181,6 @@ public class Player extends Unit {
             case DOWNLEFT:
                 this.currentAnimation = this.downLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = (int)(this.XY.x - speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.XY.y = (int)(this.XY.y - speed * Gdx.graphics.getDeltaTime()/1.41);
                 this.movementVector.y = -0.7f;
                 this.movementVector.x = -0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
@@ -199,10 +189,8 @@ public class Player extends Unit {
             case DOWNRIGHT:
                 this.currentAnimation = this.downRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.XY.x = (int)(this.XY.x + speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.XY.y = (int)(this.XY.y - speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.movementVector.y = 0.7f;
-                this.movementVector.x = -0.7f;
+                this.movementVector.y = -0.7f;
+                this.movementVector.x = 0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
@@ -240,8 +228,19 @@ public class Player extends Unit {
     }
 
     private void refreshCollisionRect(){
-        this.collisionCircle.x = this.XY.x + this.width/2;
-        this.collisionCircle.y = this.XY.y + this.height/8;
-        this.collisionCircle.radius = this.width/8;
+        this.refreshCollisionRect(this.collisionCircle, this.XY);
     }
+
+    private void refreshCollisionRect(Circle circle, Vector2 XY){
+        circle.x = XY.x + this.width/2;
+        circle.y = XY.y + this.height/8;
+        circle.radius = this.width/8;
+    }
+
+    public Circle getCollisionCircleByCoord(Vector2 XY){
+        Circle circle = new Circle();
+        refreshCollisionRect(circle, XY);
+        return circle;
+    }
+
 }

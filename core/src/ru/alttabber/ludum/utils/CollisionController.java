@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.utils;
 
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.Wall;
@@ -21,10 +22,9 @@ public class CollisionController {
         impassableObjects.addAll(walls);
     }
 
-    public boolean isMovementPossible(){
-        Player player = GameController.getInstance().getPlayer();
+    public boolean isMovementPossible(Circle playerCircle){
         for(Wall wall: impassableObjects){
-            if(Intersector.overlaps(player.getCollisionCircle(), wall.getRectangle())){
+            if(Intersector.overlaps(playerCircle, wall.getRectangle())){
                 return false;
             }
         }
