@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
@@ -122,6 +123,11 @@ public class Player extends Unit {
         if(GameController.getInstance().getCollisionController().isMovementPossible(getCollisionCircleByCoord(nextXY))){
             this.XY.x = this.nextXY.x;
             this.XY.y = this.nextXY.y;
+        }
+        AutomaticUsableObject autoUseObj =
+                GameController.getInstance().getCollisionController().getAutoUseObject(this.collisionCircle);
+        if(autoUseObj != null){
+            autoUseObj.doMapAction();
         }
         sprite.setPosition(this.XY.x, this.XY.y);
         this.sprite.draw(batch);
@@ -250,5 +256,10 @@ public class Player extends Unit {
         if(item != null) {
             item.doMapAction();
         }
+    }
+
+    public void setXY(float x, float y) {
+        this.XY.x = x;
+        this.XY.y = y;
     }
 }

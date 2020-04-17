@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.GameObject;
+import ru.alttabber.ludum.gameobjects.MapUsableObject;
 import ru.alttabber.ludum.memory.GameController;
 
 public class Item extends GameObject implements MapUsableObject {

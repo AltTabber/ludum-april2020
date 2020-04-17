@@ -2,17 +2,24 @@ package ru.alttabber.ludum.scene;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.alttabber.ludum.gameobjects.Wall;
+import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.utils.CollisionController;
 
 import java.util.List;
 
 public abstract class Scene {
 
+    protected String sceneName;
+
     protected List<Wall> walls;
+    Batch batch;
 
     public abstract void draw();
 
-    public abstract void init(Batch batch);
+    public void init(Batch batch){
+        GameController.getInstance().getCollisionController().clear();
+        this.batch = batch;
+    }
 
 
 }

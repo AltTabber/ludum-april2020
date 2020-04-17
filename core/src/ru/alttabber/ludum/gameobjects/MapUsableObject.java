@@ -1,4 +1,4 @@
-package ru.alttabber.ludum.gameobjects.units;
+package ru.alttabber.ludum.gameobjects;
 
 import com.badlogic.gdx.math.Rectangle;
 

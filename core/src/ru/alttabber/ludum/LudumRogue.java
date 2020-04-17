@@ -28,7 +28,7 @@ public class LudumRogue extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		startScene = new StartScene();
+		startScene = (StartScene) GameController.getInstance().getLevelController().chooseLevel(StartScene.class);
 		startScene.init(batch);
 
 		this.ui = new UIOverlay();
@@ -40,7 +40,7 @@ public class LudumRogue extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		startScene.draw();
+		GameController.getInstance().getLevelController().getCurrentLevel().draw();
 		batch.end();
 
 		this.ui.draw();

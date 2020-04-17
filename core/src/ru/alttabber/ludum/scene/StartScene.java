@@ -2,10 +2,11 @@ package ru.alttabber.ludum.scene;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
+import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.SwordItem;
 import ru.alttabber.ludum.gameobjects.units.Item;
-import ru.alttabber.ludum.gameobjects.units.MapUsableObject;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
@@ -18,23 +19,19 @@ public class StartScene extends Scene {
 
     Player player;
     SwordItem sword;
-    SpriteAnimation animation;
 
-    Batch batch;
 
     public StartScene() {
     }
 
     @Override
     public void init(Batch batch) {
-        this.batch = batch;
+
+        super.init(batch);
 
         GameController.getInstance().getAssetController().loadPlayerAssets();
         GameController.getInstance().getAssetController().loadItems();
         GameController.getInstance().getAssetManager().finishLoading();
-
-        animation = new SpriteAnimation(Assets.frontTextureAnimation, 200,200);
-        animation.init(batch);
 
         player = new Player();
         player.init(batch);
@@ -54,6 +51,10 @@ public class StartScene extends Scene {
         GameController.getInstance().getCollisionController().addWalls(walls);
 
         GameController.getInstance().getCollisionController().addUsableObject(sword);
+
+        Teleport teleport = new Teleport();
+        teleport.init(batch);
+        GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
     }
 
     @Override
@@ -66,7 +67,10 @@ public class StartScene extends Scene {
             obj.draw();
         }
 
+        for(AutomaticUsableObject obj: GameController.getInstance().getCollisionController().getAutoUseObjects()){
+            obj.draw();
+        }
+
         player.draw();
-        animation.draw();
     }
 }
