@@ -22,6 +22,7 @@ public class AssetManagerController {
         assetManager.load(Assets.sideBehindTexture, Texture.class);
         assetManager.load(Assets.sideFrontTexture, Texture.class);
         assetManager.load(Assets.behindTexture, Texture.class);
+        assetManager.load(Assets.pressZ, Texture.class);
         assetManager.load(Assets.footStep, Sound.class);
 
         loadAnimationArray(Assets.frontTextureAnimation);

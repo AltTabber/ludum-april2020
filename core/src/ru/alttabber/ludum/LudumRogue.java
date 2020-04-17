@@ -33,7 +33,7 @@ public class LudumRogue extends ApplicationAdapter {
 
 		barManager = new BarManager();
 		barManager.addNewBar(new HitBar(GameController.getInstance().getPlayer().getHits()));
-		barManager.addNewBar(new ManaBar());
+		//barManager.addNewBar(new ManaBar());
 		shapeRenderer = new ShapeRenderer();
 
 	}
