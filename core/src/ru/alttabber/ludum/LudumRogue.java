@@ -14,6 +14,7 @@ import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.scene.StartScene;
+import ru.alttabber.ludum.ui.UIOverlay;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 public class LudumRogue extends ApplicationAdapter {
@@ -21,8 +22,7 @@ public class LudumRogue extends ApplicationAdapter {
 	SpriteBatch batch;
 	StartScene startScene;
 
-	BarManager barManager;
-	ShapeRenderer shapeRenderer;
+	UIOverlay ui;
 	
 	@Override
 	public void create () {
@@ -31,10 +31,8 @@ public class LudumRogue extends ApplicationAdapter {
 		startScene = new StartScene();
 		startScene.init(batch);
 
-		barManager = new BarManager();
-		barManager.addNewBar(new HitBar(GameController.getInstance().getPlayer().getHits()));
-		//barManager.addNewBar(new ManaBar());
-		shapeRenderer = new ShapeRenderer();
+		this.ui = new UIOverlay();
+		this.ui.init();
 
 	}
 
@@ -45,14 +43,9 @@ public class LudumRogue extends ApplicationAdapter {
 		startScene.draw();
 		batch.end();
 
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		for (int i = 0; i < barManager.getNumbOfBars(); i++) {
-			shapeRenderer.setColor(barManager.getBarList().get(i).getEmptyColor());
-			shapeRenderer.rect(barManager.getStartX(), barManager.getYOfBar(i), barManager.getBarList().get(i).getMaxLength(), barManager.getBarList().get(i).getHight());
-			shapeRenderer.setColor(barManager.getBarList().get(i).getColor());
-			shapeRenderer.rect(barManager.getStartX(), barManager.getYOfBar(i), barManager.getBarList().get(i).getLength(), barManager.getBarList().get(i).getHight());
-		}
-		shapeRenderer.end();
+		this.ui.draw();
+
+
 	}
 	
 	@Override
