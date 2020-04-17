@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.Array;
-import ru.alttabber.ludum.abstracts.GameObject;
-import ru.alttabber.ludum.memory.Assets;
+import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.memory.GameController;
 
 import java.util.ArrayList;
@@ -75,7 +73,7 @@ public class SpriteAnimation extends GameObject {
     @Override
     public void init(Batch batch) {
         this.batch = batch;
-        this.x = 0;
-        this.y = 0;
+        this.XY.x = 0;
+        this.XY.y = 0;
     }
 }

@@ -1,13 +1,13 @@
-package ru.alttabber.ludum.abstracts;
+package ru.alttabber.ludum.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameObject {
 
-    protected float x;
-    protected float y;
+    protected Vector2 XY = new Vector2();
     protected int height;
     protected int width;
     protected Batch batch;
@@ -27,5 +27,16 @@ public abstract class GameObject {
         return sprite;
     }
 
+    public Vector2 getXY() {
+        return XY;
+    }
+
+    public float getX(){
+        return XY.x;
+    }
+
+    public float getY(){
+        return XY.y;
+    }
 
 }

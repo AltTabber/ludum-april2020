@@ -1,10 +1,13 @@
-package ru.alttabber.ludum.units;
+package ru.alttabber.ludum.gameobjects.units;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
@@ -20,15 +23,6 @@ public class Player extends Unit {
     private Texture sideBehindTexture;
     private Texture currentTexture;
 
-    private Sprite leftSprite;
-    private Sprite rightSprite;
-    private Sprite upSprite;
-    private Sprite downSprite;
-    private Sprite upLeftSprite;
-    private Sprite upRightSprite;
-    private Sprite downLeftSprite;
-    private Sprite downRightSprite;
-
     private SpriteAnimation upAnimation;
     private SpriteAnimation downAnimation;
     private SpriteAnimation rightAnimation;
@@ -40,6 +34,8 @@ public class Player extends Unit {
     private SpriteAnimation currentAnimation;
     private float animationTime = 0;
 
+    private Vector2 prevXY;
+
     private Sound footStep;
 
     private Sprite sprite;
@@ -47,6 +43,10 @@ public class Player extends Unit {
     private PlayerInput input = PlayerInput.IDLE;
 
     private Inventory inventory;
+
+    private Circle collisionCircle;
+
+    private Vector2 movementVector;
 
     float footStepTime = 1f;
     boolean nowGo = false;
@@ -73,21 +73,10 @@ public class Player extends Unit {
         currentTexture = frontTexture;
         footStep = GameController.getInstance().getAssetManager().get(Assets.footStep);
 
-        this.x = 400;
-        this.y = 400;
+        this.XY.x = 400;
+        this.XY.y = 400;
 
-        this.leftSprite = createScaledSprite(sideTexture);
-        this.leftSprite.flip(true, false);
-        this.rightSprite = createScaledSprite(sideTexture);
-        this.upSprite = createScaledSprite(behindTexture);
-        this.downSprite = createScaledSprite(frontTexture);
-
-        this.upRightSprite = createScaledSprite(sideBehindTexture);
-        this.upLeftSprite = createScaledSprite(sideBehindTexture);
-        this.upLeftSprite.flip(true, false);
-        this.downRightSprite = createScaledSprite(sideFrontTexture);
-        this.downLeftSprite = createScaledSprite(sideFrontTexture);
-        this.downLeftSprite.flip(true, false);
+        this.prevXY = new Vector2(XY.x, XY.y);
 
         this.upAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
         this.downAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
@@ -110,8 +99,13 @@ public class Player extends Unit {
 
         this.currentAnimation = this.downAnimation;
 
+        Sprite[] frames =  this.currentAnimation.getAnimation().getKeyFrames();
+        this.sprite = frames[frames.length - 1];
 
-        this.sprite = this.downSprite;
+        this.collisionCircle = new Circle();
+        refreshCollisionRect();
+
+        this.movementVector = new Vector2();
 
         this.batch = batch;
     }
@@ -120,7 +114,14 @@ public class Player extends Unit {
     public void draw() {
         this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
         this.doActionByInput(this.input);
-        sprite.setPosition(this.x, this.y);
+        refreshCollisionRect();
+        if(!GameController.getInstance().getCollisionController().isMovementPossible()){
+            this.XY.x = this.prevXY.x;
+            this.XY.y = this.prevXY.y;
+        }
+        sprite.setPosition(this.XY.x, this.XY.y);
+        this.prevXY.x = this.XY.x;
+        this.prevXY.y = this.XY.y;
         this.sprite.draw(batch);
 
         this.input = PlayerInput.IDLE;
@@ -132,66 +133,84 @@ public class Player extends Unit {
             case UP:
                 this.currentAnimation = this.downAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.y = this.y + speed * Gdx.graphics.getDeltaTime();
+                this.XY.y = this.XY.y + speed * Gdx.graphics.getDeltaTime();
+                this.movementVector.y = 1;
+                this.movementVector.x = 0;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case DOWN:
                 this.currentAnimation = this.upAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.y = this.y - speed * Gdx.graphics.getDeltaTime();
+                this.XY.y = this.XY.y - speed * Gdx.graphics.getDeltaTime();
+                this.movementVector.y = -1;
+                this.movementVector.x = 0;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case RIGHT:
                 this.currentAnimation = this.rightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = this.x + speed * Gdx.graphics.getDeltaTime();
+                this.XY.x = this.XY.x + speed * Gdx.graphics.getDeltaTime();
+                this.movementVector.y = 0;
+                this.movementVector.x = 1;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case LEFT:
                 this.currentAnimation = this.leftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = this.x - speed * Gdx.graphics.getDeltaTime();
+                this.XY.x = this.XY.x - speed * Gdx.graphics.getDeltaTime();
+                this.movementVector.y = 0;
+                this.movementVector.x = -1;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case UPLEFT:
                 this.currentAnimation = this.upLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
-                this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
+                this.XY.x = (int)(this.XY.x - speed * Gdx.graphics.getDeltaTime() / 1.41);
+                this.XY.y = (int)(this.XY.y + speed * Gdx.graphics.getDeltaTime()/ 1.41);
+                this.movementVector.y = -0.7f;
+                this.movementVector.x = 0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case UPRIGHT:
                 this.currentAnimation = this.upRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.y = (int)(this.y + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.x = (int)(this.XY.x + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.y = (int)(this.XY.y + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.movementVector.y = 0.7f;
+                this.movementVector.x = 0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case DOWNLEFT:
                 this.currentAnimation = this.downLeftAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = (int)(this.x - speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.x = (int)(this.XY.x - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.y = (int)(this.XY.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.movementVector.y = -0.7f;
+                this.movementVector.x = -0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case DOWNRIGHT:
                 this.currentAnimation = this.downRightAnimation;
                 this.sprite = this.currentAnimation.getKeyFrame(animationTime);
-                this.x = (int)(this.x + speed * Gdx.graphics.getDeltaTime()/1.41);
-                this.y = (int)(this.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.x = (int)(this.XY.x + speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.XY.y = (int)(this.XY.y - speed * Gdx.graphics.getDeltaTime()/1.41);
+                this.movementVector.y = 0.7f;
+                this.movementVector.x = -0.7f;
                 footStepTime = footStepTime + Gdx.graphics.getDeltaTime();
                 nowGo = true;
                 break;
             case IDLE:
                 animationTime = 0;
                 Sprite[] frames =  this.currentAnimation.getAnimation().getKeyFrames();
+                this.movementVector.y = 0;
+                this.movementVector.x = 0;
                 this.sprite = frames[frames.length - 1];
                 footStepTime = 1f;
                 nowGo = false;
@@ -214,5 +233,15 @@ public class Player extends Unit {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Circle getCollisionCircle() {
+        return collisionCircle;
+    }
+
+    private void refreshCollisionRect(){
+        this.collisionCircle.x = this.XY.x + this.width/2;
+        this.collisionCircle.y = this.XY.y + this.height/8;
+        this.collisionCircle.radius = this.width/8;
     }
 }

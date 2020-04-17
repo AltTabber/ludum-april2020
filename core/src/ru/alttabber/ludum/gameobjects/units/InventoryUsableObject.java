@@ -1,4 +1,4 @@
-package ru.alttabber.ludum.units;
+package ru.alttabber.ludum.gameobjects.units;
 
 public interface InventoryUsableObject {
 

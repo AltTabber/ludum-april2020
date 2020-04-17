@@ -1,6 +1,6 @@
 package ru.alttabber.ludum.ui;
 
-import ru.alttabber.ludum.units.Item;
+import ru.alttabber.ludum.gameobjects.units.Item;
 
 import java.util.ArrayList;
 import java.util.List;

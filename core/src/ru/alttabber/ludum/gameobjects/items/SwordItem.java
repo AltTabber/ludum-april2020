@@ -1,10 +1,10 @@
-package ru.alttabber.ludum.items;
+package ru.alttabber.ludum.gameobjects.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.units.Item;
+import ru.alttabber.ludum.gameobjects.units.Item;
 
 public class SwordItem extends Item {
 
@@ -18,8 +18,8 @@ public class SwordItem extends Item {
 
         this.sprite = createScaledSprite(texture);
 
-        this.x = 400;
-        this.y = 400;
+        this.XY.x = 400;
+        this.XY.y = 400;
     }
 
 

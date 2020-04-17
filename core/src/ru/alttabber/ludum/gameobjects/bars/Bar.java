@@ -1,4 +1,4 @@
-package ru.alttabber.ludum.bars;
+package ru.alttabber.ludum.gameobjects.bars;
 
 import com.badlogic.gdx.graphics.Color;
 

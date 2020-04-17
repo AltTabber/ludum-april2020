@@ -3,13 +3,15 @@ package ru.alttabber.ludum.memory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import ru.alttabber.ludum.inputs.InputController;
-import ru.alttabber.ludum.units.Player;
+import ru.alttabber.ludum.gameobjects.units.Player;
+import ru.alttabber.ludum.utils.CollisionController;
 
 public class GameController {
 
     private AssetManagerController assetController;
     private InputController inputController;
     private Player player;
+    private CollisionController collisionController;
 
     private static GameController instance;
 
@@ -17,6 +19,7 @@ public class GameController {
         this.assetController = new AssetManagerController();
         this.inputController = new InputController();
         Gdx.input.setInputProcessor(inputController);
+        collisionController = new CollisionController();
     }
 
     public static GameController getInstance(){
@@ -44,5 +47,9 @@ public class GameController {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public CollisionController getCollisionController() {
+        return collisionController;
     }
 }

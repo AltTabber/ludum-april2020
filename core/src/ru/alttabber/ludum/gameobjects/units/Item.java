@@ -1,10 +1,9 @@
-package ru.alttabber.ludum.units;
+package ru.alttabber.ludum.gameobjects.units;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import ru.alttabber.ludum.abstracts.GameObject;
-import ru.alttabber.ludum.memory.Assets;
+import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.memory.GameController;
 
 public class Item extends GameObject implements MapUsableObject {
@@ -26,7 +25,7 @@ public class Item extends GameObject implements MapUsableObject {
 
     @Override
     public void draw() {
-        sprite.setPosition(this.x, this.y);
+        sprite.setPosition(this.XY.x, this.XY.y);
         this.sprite.draw(batch);
     }
 

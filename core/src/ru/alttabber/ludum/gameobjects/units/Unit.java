@@ -1,6 +1,6 @@
-package ru.alttabber.ludum.units;
+package ru.alttabber.ludum.gameobjects.units;
 
-import ru.alttabber.ludum.abstracts.GameObject;
+import ru.alttabber.ludum.gameobjects.GameObject;
 
 public abstract class Unit extends GameObject {
 

@@ -1,12 +1,8 @@
 package ru.alttabber.ludum.inputs;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import ru.alttabber.ludum.units.Player;
 import ru.alttabber.ludum.utils.UniqueArrayList;
-
-import java.util.*;
 
 public class InputController implements InputProcessor {
 
