@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.gameobjects.units;
 
+import com.badlogic.gdx.math.Rectangle;
 
 public interface MapUsableObject {
 
@@ -7,4 +8,5 @@ public interface MapUsableObject {
 
     void destroyItem();
 
+    Rectangle getRectangle();
 }

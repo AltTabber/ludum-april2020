@@ -2,6 +2,7 @@ package ru.alttabber.ludum.gameobjects.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.gameobjects.units.Item;
@@ -19,7 +20,9 @@ public class SwordItem extends Item {
         this.sprite = createScaledSprite(texture);
 
         this.XY.x = 400;
-        this.XY.y = 400;
+        this.XY.y = 200;
+
+        this.rectangle = new Rectangle(XY.x, XY.y, width, height);
     }
 
 

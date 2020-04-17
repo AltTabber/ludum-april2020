@@ -3,6 +3,7 @@ package ru.alttabber.ludum.gameobjects.units;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.memory.GameController;
 
@@ -11,6 +12,7 @@ public class Item extends GameObject implements MapUsableObject {
     protected String name;
     protected Texture texture;
     protected Sprite sprite;
+    protected Rectangle rectangle;
 
     @Override
     public void doMapAction() {
@@ -20,7 +22,12 @@ public class Item extends GameObject implements MapUsableObject {
 
     @Override
     public void destroyItem() {
-        //TODO
+        GameController.getInstance().getCollisionController().removeItem(this);
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     @Override
@@ -46,7 +53,5 @@ public class Item extends GameObject implements MapUsableObject {
         GameController.getInstance().getPlayer().getInventory().addItem(this);
         destroyItem();
     }
-
-
 
 }

@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.SwordItem;
+import ru.alttabber.ludum.gameobjects.units.Item;
+import ru.alttabber.ludum.gameobjects.units.MapUsableObject;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.utils.CollisionController;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class StartScene extends Scene {
 
 
     Player player;
-    SwordItem item;
+    SwordItem sword;
     SpriteAnimation animation;
 
     Batch batch;
@@ -40,8 +41,8 @@ public class StartScene extends Scene {
 
         GameController.getInstance().setPlayer(player);
 
-        item = new SwordItem();
-        item.init(batch);
+        sword = new SwordItem();
+        sword.init(batch);
 
         this.walls = new ArrayList<>();
         this.walls.add(new Wall(new Vector2(800, 100), new Vector2(900, 500)));
@@ -51,6 +52,8 @@ public class StartScene extends Scene {
         }
 
         GameController.getInstance().getCollisionController().addWalls(walls);
+
+        GameController.getInstance().getCollisionController().addUsableObject(sword);
     }
 
     @Override
@@ -58,7 +61,11 @@ public class StartScene extends Scene {
         for(Wall wall: this.walls){
             wall.draw();
         }
-        item.draw();
+
+        for(Item obj: GameController.getInstance().getCollisionController().getUsableObjects()){
+            obj.draw();
+        }
+
         player.draw();
         animation.draw();
     }

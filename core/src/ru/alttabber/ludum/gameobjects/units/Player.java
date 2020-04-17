@@ -107,6 +107,8 @@ public class Player extends Unit {
 
         this.movementVector = new Vector2();
 
+        this.inventory = new Inventory();
+
         this.batch = batch;
     }
 
@@ -243,4 +245,10 @@ public class Player extends Unit {
         return circle;
     }
 
+    public void useItem() {
+        Item item = GameController.getInstance().getCollisionController().getUsableObject(collisionCircle);
+        if(item != null) {
+            item.doMapAction();
+        }
+    }
 }
