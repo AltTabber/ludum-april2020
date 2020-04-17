@@ -7,6 +7,7 @@ public class Assets {
     public static final String sideTexture = "player/side_0000.png";
     public static final String sideFrontTexture = "player/frontside_0000.png";
     public static final String sideBehindTexture = "player/behindside_0000.png";
+    public static final String pressZ = "Press-Z.png";
 
     public static final String[] frontTextureAnimation =
             {
