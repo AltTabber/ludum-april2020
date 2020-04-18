@@ -35,6 +35,10 @@ public class AssetManagerController {
         assetManager.load(Assets.swordTexture, Texture.class);
     }
 
+    public void loadGhost(){
+        assetManager.load(Assets.ghostTexture, Texture.class);
+    }
+
     private void loadAnimationArray(String[] array){
         for(String path: array){
             assetManager.load(path, Texture.class);

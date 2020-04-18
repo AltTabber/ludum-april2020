@@ -6,6 +6,7 @@ import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.SwordItem;
+import ru.alttabber.ludum.gameobjects.units.Ghost;
 import ru.alttabber.ludum.gameobjects.units.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
@@ -19,6 +20,7 @@ public class StartScene extends Scene {
 
     Player player;
     SwordItem sword;
+    Ghost ghost;
 
 
     public StartScene() {
@@ -31,6 +33,7 @@ public class StartScene extends Scene {
 
         GameController.getInstance().getAssetController().loadPlayerAssets();
         GameController.getInstance().getAssetController().loadItems();
+        GameController.getInstance().getAssetController().loadGhost();
         GameController.getInstance().getAssetManager().finishLoading();
 
         player = new Player();
@@ -40,6 +43,9 @@ public class StartScene extends Scene {
 
         sword = new SwordItem();
         sword.init(batch);
+
+        this.ghost = new Ghost();
+        this.ghost.init(batch);
 
         this.walls = new ArrayList<>();
         this.walls.add(new Wall(new Vector2(800, 100), new Vector2(900, 500)));
@@ -72,5 +78,7 @@ public class StartScene extends Scene {
         }
 
         player.draw();
+
+        this.ghost.draw();
     }
 }
