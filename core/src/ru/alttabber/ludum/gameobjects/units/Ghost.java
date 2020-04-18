@@ -20,8 +20,8 @@ public class Ghost extends Unit {
         this.XY.x = 800;
         this.XY.y = 200;
 
-        this.width = 400;
-        this.height = 400;
+        this.width = 500;
+        this.height = 500;
 
         this.texture = GameController.getInstance().getAssetManager().get(Assets.ghostTexture);
         this.sprite = createScaledSprite(texture);
