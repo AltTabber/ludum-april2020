@@ -2,11 +2,9 @@ package ru.alttabber.ludum.gameobjects.units;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.inputs.PlayerInput;
@@ -16,13 +14,6 @@ import ru.alttabber.ludum.ui.Inventory;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 public class Player extends Unit {
-
-    private Texture behindTexture;
-    private Texture frontTexture;
-    private Texture sideTexture;
-    private Texture sideFrontTexture;
-    private Texture sideBehindTexture;
-    private Texture currentTexture;
 
     private SpriteAnimation upAnimation;
     private SpriteAnimation downAnimation;
@@ -54,7 +45,7 @@ public class Player extends Unit {
 
     int counter = 0;
     
-    int speed = 400;
+    int speed = 300;
 
     public Player() {
         super();
@@ -66,12 +57,6 @@ public class Player extends Unit {
 
     @Override
     public void init(Batch batch) {
-        behindTexture = GameController.getInstance().getAssetManager().get(Assets.behindTexture);
-        frontTexture = GameController.getInstance().getAssetManager().get(Assets.frontTexture);
-        sideTexture = GameController.getInstance().getAssetManager().get(Assets.sideTexture);
-        sideFrontTexture = GameController.getInstance().getAssetManager().get(Assets.sideFrontTexture);
-        sideBehindTexture = GameController.getInstance().getAssetManager().get(Assets.sideBehindTexture);
-        currentTexture = frontTexture;
         footStep = GameController.getInstance().getAssetManager().get(Assets.footStep);
 
         this.XY.x = 400;
@@ -81,22 +66,26 @@ public class Player extends Unit {
 
         this.upAnimation = new SpriteAnimation(Assets.frontTextureAnimation, this.width, this.height);
         this.downAnimation = new SpriteAnimation(Assets.behindTextureAnimation, this.width, this.height);
-        this.rightAnimation = new SpriteAnimation(Assets.sideTextureAnimation, this.width, this.height);
-        this.upRightAnimation = new SpriteAnimation(Assets.behindSideTextureAnimation, this.width, this.height);
-        this.downRightAnimation = new SpriteAnimation(Assets.frontSideTextureAnimation, this.width, this.height);
+        this.rightAnimation = new SpriteAnimation(Assets.rightTextureAnimation, this.width, this.height);
+        this.upRightAnimation = new SpriteAnimation(Assets.downRightTextureAnimation, this.width, this.height);
+        this.downRightAnimation = new SpriteAnimation(Assets.upRightTextureAnimation, this.width, this.height);
 
-        this.leftAnimation = new SpriteAnimation(Assets.sideTextureAnimation, this.width, this.height);
-        this.leftAnimation.transformSprites(animationSprite -> {
-            animationSprite.flip(true,false);
-        });
-        this.upLeftAnimation = new SpriteAnimation(Assets.behindSideTextureAnimation, this.width, this.height);
-        this.upLeftAnimation.transformSprites(animationSprite -> {
-            animationSprite.flip(true,false);
-        });
-        this.downLeftAnimation = new SpriteAnimation(Assets.frontSideTextureAnimation, this.width, this.height);
-        this.downLeftAnimation.transformSprites(animationSprite -> {
-            animationSprite.flip(true,false);
-        });
+        this.leftAnimation = new SpriteAnimation(Assets.leftTextureAnimation, this.width, this.height);
+        this.upLeftAnimation = new SpriteAnimation(Assets.downLeftTextureAnimation, this.width, this.height);
+        this.downLeftAnimation = new SpriteAnimation(Assets.upLeftTextureAnimation, this.width, this.height);
+
+//        this.leftAnimation = new SpriteAnimation(Assets.rightTextureAnimation, this.width, this.height);
+//        this.leftAnimation.transformSprites(animationSprite -> {
+//            animationSprite.flip(true,false);
+//        });
+//        this.upLeftAnimation = new SpriteAnimation(Assets.downRightTextureAnimation, this.width, this.height);
+//        this.upLeftAnimation.transformSprites(animationSprite -> {
+//            animationSprite.flip(true,false);
+//        });
+//        this.downLeftAnimation = new SpriteAnimation(Assets.upRightTextureAnimation, this.width, this.height);
+//        this.downLeftAnimation.transformSprites(animationSprite -> {
+//            animationSprite.flip(true,false);
+//        });
 
         this.currentAnimation = this.downAnimation;
 

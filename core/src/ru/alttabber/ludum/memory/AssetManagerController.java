@@ -17,19 +17,17 @@ public class AssetManagerController {
     }
 
     public void loadPlayerAssets(){
-        assetManager.load(Assets.frontTexture, Texture.class);
-        assetManager.load(Assets.sideTexture, Texture.class);
-        assetManager.load(Assets.sideBehindTexture, Texture.class);
-        assetManager.load(Assets.sideFrontTexture, Texture.class);
-        assetManager.load(Assets.behindTexture, Texture.class);
         assetManager.load(Assets.pressZ, Texture.class);
         assetManager.load(Assets.footStep, Sound.class);
 
         loadAnimationArray(Assets.frontTextureAnimation);
         loadAnimationArray(Assets.behindTextureAnimation);
-        loadAnimationArray(Assets.sideTextureAnimation);
-        loadAnimationArray(Assets.frontSideTextureAnimation);
-        loadAnimationArray(Assets.behindSideTextureAnimation);
+        loadAnimationArray(Assets.rightTextureAnimation);
+        loadAnimationArray(Assets.upRightTextureAnimation);
+        loadAnimationArray(Assets.downRightTextureAnimation);
+        loadAnimationArray(Assets.leftTextureAnimation);
+        loadAnimationArray(Assets.upLeftTextureAnimation);
+        loadAnimationArray(Assets.downLeftTextureAnimation);
 
     }
 
