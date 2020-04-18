@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public abstract class GameObject {
+public abstract class GameObject extends Actor {
 
     protected Vector2 XY = new Vector2();
     protected int height;

@@ -11,6 +11,7 @@ import ru.alttabber.ludum.gameobjects.units.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.ui.Camera;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 import java.util.ArrayList;
@@ -22,12 +23,15 @@ public class StartScene extends Scene {
     SwordItem sword;
     Ghost ghost;
 
+    Camera camera;
+
 
     public StartScene() {
     }
 
     @Override
     public void init(Batch batch) {
+        GameController.getInstance().getCamera().init();
 
         super.init(batch);
 
@@ -61,10 +65,17 @@ public class StartScene extends Scene {
         Teleport teleport = new Teleport();
         teleport.init(batch);
         GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
+
     }
 
     @Override
     public void draw() {
+
+        GameController.getInstance().getCamera().update();
+        batch.setProjectionMatrix(GameController.getInstance().getCamera().getCamera().combined);
+
+
+
         for(Wall wall: this.walls){
             wall.draw();
         }
@@ -80,5 +91,6 @@ public class StartScene extends Scene {
         player.draw();
 
         this.ghost.draw();
+
     }
 }

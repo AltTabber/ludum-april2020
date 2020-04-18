@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import ru.alttabber.ludum.inputs.InputController;
 import ru.alttabber.ludum.gameobjects.units.Player;
+import ru.alttabber.ludum.ui.Camera;
 import ru.alttabber.ludum.utils.CollisionController;
 import ru.alttabber.ludum.utils.LevelController;
 
@@ -14,6 +15,7 @@ public class GameController {
     private Player player;
     private CollisionController collisionController;
     private LevelController levelController;
+    private Camera camera;
 
     private static GameController instance;
 
@@ -23,6 +25,7 @@ public class GameController {
         Gdx.input.setInputProcessor(inputController);
         collisionController = new CollisionController();
         this.levelController = new LevelController();
+        this.camera = new Camera();
     }
 
     public static GameController getInstance(){
@@ -58,5 +61,9 @@ public class GameController {
 
     public LevelController getLevelController() {
         return levelController;
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 }

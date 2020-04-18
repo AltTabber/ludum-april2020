@@ -49,8 +49,8 @@ public class Player extends Unit {
 
     public Player() {
         super();
-        this.height = 200;
-        this.width = 200;
+        this.height = 150;
+        this.width = 150;
         this.hits = 100;
 
     }
