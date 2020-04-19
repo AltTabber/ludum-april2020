@@ -33,12 +33,15 @@ public class AssetManagerController {
 
     public void loadItems(){
         assetManager.load(Assets.swordTexture, Texture.class);
+        assetManager.load(Assets.oilTexture, Texture.class);
+        assetManager.load(Assets.flareGunTexture, Texture.class);
     }
 
     public void loadGhost(){
         assetManager.load(Assets.ghostTexture, Texture.class);
         assetManager.load(Assets.ghostOverlayTexture, Texture.class);
     }
+
 
     private void loadAnimationArray(String[] array){
         for(String path: array){

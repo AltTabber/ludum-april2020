@@ -5,15 +5,15 @@ import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
+import ru.alttabber.ludum.gameobjects.items.FlareGunItem;
+import ru.alttabber.ludum.gameobjects.items.OilLampItem;
 import ru.alttabber.ludum.gameobjects.items.SwordItem;
 import ru.alttabber.ludum.gameobjects.units.Ghost;
-import ru.alttabber.ludum.gameobjects.units.Item;
+import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
-import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.ui.Camera;
+import ru.alttabber.ludum.ui.MapController;
 import ru.alttabber.ludum.utils.MaskedCircle;
-import ru.alttabber.ludum.utils.SpriteAnimation;
 
 import java.util.ArrayList;
 
@@ -21,10 +21,10 @@ public class StartScene extends Scene {
 
 
     Player player;
-    SwordItem sword;
     Ghost ghost;
 
     MaskedCircle maskedCircle;
+    MapController mapController;
 
 
     public StartScene() {
@@ -46,8 +46,7 @@ public class StartScene extends Scene {
 
         GameController.getInstance().setPlayer(player);
 
-        sword = new SwordItem();
-        sword.init(batch);
+
 
         this.ghost = new Ghost();
         this.ghost.init(batch);
@@ -59,16 +58,32 @@ public class StartScene extends Scene {
             wall.init(this.batch);
         }
 
-        GameController.getInstance().getCollisionController().addWalls(walls);
+//        GameController.getInstance().getCollisionController().addWalls(walls);
 
-        GameController.getInstance().getCollisionController().addUsableObject(sword);
 
-        Teleport teleport = new Teleport();
-        teleport.init(batch);
-        GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
+        OilLampItem oilLampItem = new OilLampItem();
+        oilLampItem.init(batch);
+        oilLampItem.setXY(200, 200);
+
+        FlareGunItem flareGunItem = new FlareGunItem();
+        flareGunItem.init(batch);
+        flareGunItem.setXY(400, 200);
+
+        GameController.getInstance().getCollisionController().addUsableObject(oilLampItem);
+        GameController.getInstance().getCollisionController().addUsableObject(flareGunItem);
+
+//        Teleport teleport = new Teleport();
+//        teleport.init(batch);
+//        GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
 
         maskedCircle = new MaskedCircle();
         maskedCircle.init(batch);
+
+        mapController = new MapController();
+        mapController.init(batch);
+
+        GameController.getInstance().getCollisionController().addWalls(mapController.getWalls());
+
 
     }
 
@@ -80,7 +95,7 @@ public class StartScene extends Scene {
 
 
 
-        for(Wall wall: this.walls){
+        for(Wall wall: GameController.getInstance().getCollisionController().getWalls()){
             wall.draw();
         }
 

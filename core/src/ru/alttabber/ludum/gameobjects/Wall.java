@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import ru.alttabber.ludum.gameobjects.models.WallModel;
 
 public class Wall extends GameObject {
 
@@ -18,10 +19,14 @@ public class Wall extends GameObject {
     private Texture texture;
 
     public Wall(Vector2 XY, Vector2 XY2) {
-        rectangle = new Rectangle(XY.x, XY.y, Math.abs(XY.x - XY2.x), Math.abs(XY.y - XY2.y));
-        this.XY = new Vector2(XY.x, XY.y);
-        this.width = Math.abs(XY.x - XY2.x);
-        this.height = Math.abs(XY.y - XY2.y);
+        this(XY.x, XY.y, XY2.x, XY2.y);
+    }
+
+    public Wall(float x1, float y1, float x2, float y2) {
+        this.XY = new Vector2(x1, y1);
+        this.width = Math.abs(x1 - x2);
+        this.height = Math.abs(y1 - y2);
+        rectangle = new Rectangle(x1, y1, this.width, this.height);
     }
 
     @Override
@@ -33,11 +38,7 @@ public class Wall extends GameObject {
     public void init(Batch batch) {
         this.batch = batch;
 
-        Pixmap pixmap = new Pixmap((int) this.width, (int) this.height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.CYAN);
-        pixmap.fillRectangle(0, 0, (int) width, (int) height);
-        texture = new Texture(pixmap);
-        pixmap.dispose();
+        texture = WallModel.getInstance().getTexture();
     }
 
     public Rectangle getRectangle() {

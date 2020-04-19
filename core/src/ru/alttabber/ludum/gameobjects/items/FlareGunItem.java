@@ -1,29 +1,28 @@
 package ru.alttabber.ludum.gameobjects.items;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.gameobjects.models.FlareGunModel;
+import ru.alttabber.ludum.gameobjects.models.OilLampModel;
 
-public class SwordItem extends Item {
+public class FlareGunItem extends Item {
+
+    FlareGunModel model;
 
     @Override
     public void init(Batch batch) {
         super.init(batch);
-        this.texture = GameController.getInstance().getAssetManager().get(Assets.swordTexture, Texture.class);
+        model = FlareGunModel.getInstance();
 
         this.width = 100;
         this.height = 100;
 
-        this.sprite = createScaledSprite(texture);
+        this.sprite = createScaledSprite(model.getTexture());
 
         this.XY.x = 400;
-        this.XY.y = 200;
+        this.XY.y = 600;
 
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
     }
-
-
 
 }

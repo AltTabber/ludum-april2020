@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
+import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
@@ -49,8 +50,8 @@ public class Player extends Unit {
 
     public Player() {
         super();
-        this.height = 150;
-        this.width = 150;
+        this.height = 180;
+        this.width = 180;
         this.hits = 100;
 
     }
@@ -122,6 +123,8 @@ public class Player extends Unit {
         this.sprite.draw(batch);
 
         this.input = PlayerInput.IDLE;
+
+        System.out.println(this.getX() + ", " + this.getY());
     }
 
     public void doActionByInput(PlayerInput input){
@@ -250,5 +253,13 @@ public class Player extends Unit {
     public void setXY(float x, float y) {
         this.XY.x = x;
         this.XY.y = y;
+    }
+
+    public void teleport(float x, float y) {
+        this.XY.x = x - width/2;
+        this.XY.y = y - height/2;
+        this.nextXY.x = XY.x;
+        this.nextXY.y = XY.y;
+        refreshCollisionRect();
     }
 }

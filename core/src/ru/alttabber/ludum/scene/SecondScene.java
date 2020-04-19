@@ -2,7 +2,7 @@ package ru.alttabber.ludum.scene;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.alttabber.ludum.gameobjects.items.SwordItem;
-import ru.alttabber.ludum.gameobjects.units.Item;
+import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
 

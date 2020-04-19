@@ -68,9 +68,9 @@ public class MaskedCircle {
 
     }
 
-    // size - 1-1000;
+    // size - 0-1000;
     public void changeMaskedCircle(int size){
-        if(size > 1000 || size < 0)
+        if(size < 0)
             throw new RuntimeException("Size of circle more than 1000 or less than 0");
 
         this.size = size;

@@ -3,9 +3,8 @@ package ru.alttabber.ludum.utils;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
-import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
-import ru.alttabber.ludum.gameobjects.units.Item;
+import ru.alttabber.ludum.gameobjects.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,5 +78,9 @@ public class CollisionController {
 
     public void addAutoUsableObject(AutomaticUsableObject autoUsableObject) {
         autoUseObjects.add(autoUsableObject);
+    }
+
+    public List<Wall> getWalls() {
+        return impassableObjects;
     }
 }

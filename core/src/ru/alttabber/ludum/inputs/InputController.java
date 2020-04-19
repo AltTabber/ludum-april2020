@@ -115,7 +115,5 @@ public class InputController implements InputProcessor {
         if(activeInputs.isEmpty()){
             currentPlayerInput = PlayerInput.IDLE;
         }
-
-        System.out.println(activeInputs.toString());
     }
 }

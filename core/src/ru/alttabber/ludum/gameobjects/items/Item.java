@@ -1,4 +1,4 @@
-package ru.alttabber.ludum.gameobjects.units;
+package ru.alttabber.ludum.gameobjects.items;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -53,6 +53,11 @@ public class Item extends GameObject implements MapUsableObject {
     public void addToInventory(){
         GameController.getInstance().getPlayer().getInventory().addItem(this);
         destroyItem();
+    }
+
+    public void setXY(float x, float y){
+        this.XY.x = x;
+        this.XY.y = y;
     }
 
 }
