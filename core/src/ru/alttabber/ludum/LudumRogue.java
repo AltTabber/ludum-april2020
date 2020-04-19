@@ -17,6 +17,7 @@ import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.scene.StartScene;
 import ru.alttabber.ludum.ui.UIOverlay;
+import ru.alttabber.ludum.utils.MaskedCircle;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 public class LudumRogue extends ApplicationAdapter {
@@ -25,6 +26,8 @@ public class LudumRogue extends ApplicationAdapter {
 	StartScene startScene;
 
 	UIOverlay ui;
+
+	MaskedCircle maskedCircle;
 	
 	@Override
 	public void create () {
@@ -36,6 +39,9 @@ public class LudumRogue extends ApplicationAdapter {
 		this.ui = new UIOverlay();
 		this.ui.init();
 
+		maskedCircle = new MaskedCircle();
+		maskedCircle.init(batch);
+
 	}
 
 	@Override
@@ -45,6 +51,7 @@ public class LudumRogue extends ApplicationAdapter {
 
 		batch.begin();
 		GameController.getInstance().getLevelController().getCurrentLevel().draw();
+		maskedCircle.draw();
 		batch.end();
 
 		this.ui.draw();
