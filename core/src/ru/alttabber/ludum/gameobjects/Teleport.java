@@ -12,6 +12,11 @@ import ru.alttabber.ludum.window.Window;
 
 public class Teleport extends AutomaticUsableObject {
 
+    public Teleport(float x, float y) {
+        this.XY.x = x;
+        this.XY.y = y;
+    }
+
     private Texture texture;
 
     @Override
@@ -25,11 +30,8 @@ public class Teleport extends AutomaticUsableObject {
     public void init(Batch batch) {
         super.init(batch);
 
-        this.XY.x = 0;
-        this.XY.y = 0;
-
-        this.width = 50;
-        this.height = Window.getHeight();
+        this.width = 150;
+        this.height = 150;
 
         this.rect = new Rectangle(XY.x, XY.y, this.width, this.height);
 

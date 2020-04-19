@@ -74,5 +74,8 @@ public class Assets {
     public static final String swordTexture = "sword.png";
     public static final String oilTexture = "items/oil.png";
     public static final String flareGunTexture = "items/flareGun.png";
+    public static final String compassTexture = "items/compass.png";
+    public static final String keyTexture = "items/key.png";
+
     public static final String map1Texture = "maps/map1.txt";
 }

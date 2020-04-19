@@ -35,6 +35,8 @@ public class AssetManagerController {
         assetManager.load(Assets.swordTexture, Texture.class);
         assetManager.load(Assets.oilTexture, Texture.class);
         assetManager.load(Assets.flareGunTexture, Texture.class);
+        assetManager.load(Assets.compassTexture, Texture.class);
+        assetManager.load(Assets.keyTexture, Texture.class);
     }
 
     public void loadGhost(){
