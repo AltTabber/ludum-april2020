@@ -16,6 +16,7 @@ public class GameController {
     private CollisionController collisionController;
     private LevelController levelController;
     private Camera camera;
+    private ExitState exitState;
 
     private static GameController instance;
 
@@ -26,6 +27,7 @@ public class GameController {
         collisionController = new CollisionController();
         this.levelController = new LevelController();
         this.camera = new Camera();
+        this.exitState = ExitState.EXIT_CLOSED;
     }
 
     public static GameController getInstance(){
@@ -65,5 +67,13 @@ public class GameController {
 
     public Camera getCamera() {
         return camera;
+    }
+
+    public ExitState getExitState() {
+        return exitState;
+    }
+
+    public void setExitState(ExitState exitState) {
+        this.exitState = exitState;
     }
 }

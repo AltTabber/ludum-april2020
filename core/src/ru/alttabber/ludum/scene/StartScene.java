@@ -72,10 +72,6 @@ public class StartScene extends Scene {
         GameController.getInstance().getCollisionController().addUsableObject(oilLampItem);
         GameController.getInstance().getCollisionController().addUsableObject(flareGunItem);
 
-//        Teleport teleport = new Teleport();
-//        teleport.init(batch);
-//        GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
-
         maskedCircle = new MaskedCircle();
         maskedCircle.init(batch);
 
@@ -114,6 +110,7 @@ public class StartScene extends Scene {
         maskedCircle.draw();
 
         this.ghost.drawOnOverlay();
+
 
     }
 }

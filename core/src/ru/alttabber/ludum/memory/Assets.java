@@ -77,5 +77,9 @@ public class Assets {
     public static final String compassTexture = "items/compass.png";
     public static final String keyTexture = "items/key.png";
 
+    public static final String floorExitOpen = "floor/exit1.png";
+    public static final String floorExitClosed = "floor/exit2.png";
+
     public static final String map1Texture = "maps/map1.txt";
+
 }

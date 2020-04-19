@@ -12,6 +12,7 @@ public class Item extends GameObject implements MapUsableObject {
 
     protected String name;
     protected Texture texture;
+    protected Sprite spriteInventory;
     protected Sprite sprite;
     protected Rectangle rectangle;
 
@@ -58,6 +59,16 @@ public class Item extends GameObject implements MapUsableObject {
     public void setXY(float x, float y){
         this.XY.x = x;
         this.XY.y = y;
+
+        this.rectangle.x = x;
+        this.rectangle.y = y;
     }
 
+    public void drawInventory(Batch batch, float x, float y) {
+        if(this.spriteInventory != null ){
+            this.spriteInventory.setX(x);
+            this.spriteInventory.setY(y);
+            this.spriteInventory.draw(batch);
+        }
+    }
 }

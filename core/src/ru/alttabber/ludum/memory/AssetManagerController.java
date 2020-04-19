@@ -37,6 +37,9 @@ public class AssetManagerController {
         assetManager.load(Assets.flareGunTexture, Texture.class);
         assetManager.load(Assets.compassTexture, Texture.class);
         assetManager.load(Assets.keyTexture, Texture.class);
+
+        assetManager.load(Assets.floorExitOpen, Texture.class);
+        assetManager.load(Assets.floorExitClosed, Texture.class);
     }
 
     public void loadGhost(){

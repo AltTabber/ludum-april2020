@@ -3,8 +3,10 @@ package ru.alttabber.ludum.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.alttabber.ludum.gameobjects.Exit;
 import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
+import ru.alttabber.ludum.gameobjects.items.KeyItem;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
 
@@ -45,11 +47,14 @@ public class MapController {
                     Player player = GameController.getInstance().getPlayer();
                     player.teleport(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
                 }else if("Ex".equals(elem)){
-                    Teleport teleport = new Teleport(blockWidth*j, blockHeight*i );
+                    Exit teleport = new Exit(blockWidth*j, blockHeight*i );
                     teleport.init(batch);
                     GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
                 }else if("Key".equals(elem)){
-
+                    KeyItem keyItem = new KeyItem();
+                    keyItem.init(batch);
+                    keyItem.setXY(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
+                    GameController.getInstance().getCollisionController().addUsableObject(keyItem);
                 }
             }
         }
