@@ -37,6 +37,7 @@ public class AssetManagerController {
 
     public void loadGhost(){
         assetManager.load(Assets.ghostTexture, Texture.class);
+        assetManager.load(Assets.ghostOverlayTexture, Texture.class);
     }
 
     private void loadAnimationArray(String[] array){

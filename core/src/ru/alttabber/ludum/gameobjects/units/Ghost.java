@@ -12,7 +12,9 @@ import ru.alttabber.ludum.memory.GameController;
 public class Ghost extends Unit {
 
     Texture texture;
+    Texture textureOverlay;
     Sprite sprite;
+    Sprite spriteOverlay;
 
     float speed;
 
@@ -30,6 +32,9 @@ public class Ghost extends Unit {
         this.texture = GameController.getInstance().getAssetManager().get(Assets.ghostTexture);
         this.sprite = createScaledSprite(texture);
 
+        this.textureOverlay = GameController.getInstance().getAssetManager().get(Assets.ghostOverlayTexture);
+        this.spriteOverlay = createScaledSprite(textureOverlay);
+
         this.speed = 50;
 
     }
@@ -45,6 +50,11 @@ public class Ghost extends Unit {
 
         this.sprite.setPosition(this.XY.x, this.XY.y);
         this.sprite.draw(batch);
+    }
+
+    public void drawOnOverlay() {
+        this.spriteOverlay.setPosition(this.XY.x, this.XY.y);
+        this.spriteOverlay.draw(batch);
     }
 
 }

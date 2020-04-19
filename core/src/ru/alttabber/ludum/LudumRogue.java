@@ -16,7 +16,6 @@ public class LudumRogue extends ApplicationAdapter {
 
 	UIOverlay ui;
 
-	MaskedCircle maskedCircle;
 
 	@Override
 	public void create () {
@@ -28,8 +27,6 @@ public class LudumRogue extends ApplicationAdapter {
 		this.ui = new UIOverlay();
 		this.ui.init();
 
-		maskedCircle = new MaskedCircle();
-		maskedCircle.init(batch);
 
 	}
 
@@ -40,7 +37,7 @@ public class LudumRogue extends ApplicationAdapter {
 
 		batch.begin();
 		GameController.getInstance().getLevelController().getCurrentLevel().draw();
-		maskedCircle.draw();
+
 		batch.end();
 
 		this.ui.draw();

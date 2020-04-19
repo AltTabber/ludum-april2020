@@ -12,6 +12,7 @@ import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.ui.Camera;
+import ru.alttabber.ludum.utils.MaskedCircle;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class StartScene extends Scene {
     SwordItem sword;
     Ghost ghost;
 
-    Camera camera;
+    MaskedCircle maskedCircle;
 
 
     public StartScene() {
@@ -66,6 +67,9 @@ public class StartScene extends Scene {
         teleport.init(batch);
         GameController.getInstance().getCollisionController().addAutoUsableObject(teleport);
 
+        maskedCircle = new MaskedCircle();
+        maskedCircle.init(batch);
+
     }
 
     @Override
@@ -91,6 +95,10 @@ public class StartScene extends Scene {
         player.draw();
 
         this.ghost.draw();
+
+        maskedCircle.draw();
+
+        this.ghost.drawOnOverlay();
 
     }
 }

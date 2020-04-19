@@ -3,6 +3,7 @@ package ru.alttabber.ludum.memory;
 public class Assets {
 
     public static final String ghostTexture = "ghost/ghost_0000.png";
+    public static final String ghostOverlayTexture = "ghost/ghost_0001.png";
     public static final String pressZ = "Press-Z.png";
 
     public static final String[] frontTextureAnimation =
