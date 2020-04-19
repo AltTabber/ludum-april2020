@@ -1,6 +1,5 @@
 package ru.alttabber.ludum.utils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,19 +16,29 @@ public class MaskedCircle {
 
     Sprite sprite;
 
-    float time = 0;
+    int size = 1000;
+
+    float width;
+    float height;
+    float deltaWidth = 0;
+    float deltaHeight = 0;
+    float maxWidth;
+    float minWidth;
+
+    float maxHeight;
+    float minHeight;
 
     public void init(Batch batch){
 
         this.batch = batch;
 
-        Pixmap pixmap = new Pixmap(Window.getWidth()*3, Window.getHeight()*3, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(Window.getWidth()*4, Window.getHeight()*4, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLACK);
         pixmap.fill();
 
-        Pixmap mask = new Pixmap(Window.getWidth()*3, Window.getHeight()*3, Pixmap.Format.RGBA8888);
+        Pixmap mask = new Pixmap(Window.getWidth()*4, Window.getHeight()*4, Pixmap.Format.RGBA8888);
         mask.setColor(Color.BLACK);
-        mask.fillCircle(Window.getWidth()*3/2, Window.getHeight()*3/2, 300);
+        mask.fillCircle(Window.getWidth()*4/2, Window.getHeight()*4/2, 300);
 
         resultedPixmap = createMask(pixmap, mask);
         texture = new Texture(resultedPixmap);
@@ -37,23 +46,36 @@ public class MaskedCircle {
 
         sprite = new Sprite(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
+        maxWidth = Window.getWidth()*4;
+        minWidth = Window.getWidth()*6/5;
+        maxHeight = Window.getHeight()*4;
+        minHeight = Window.getHeight()*6/5;
+        deltaWidth = (maxWidth - minWidth)/1000;
+        deltaHeight = (maxHeight - minHeight)/1000;
+
+        changeMaskedCircle(size);
+
     }
 
     public void draw(){
 
-        float newWidth = texture.getWidth() - time*300*0.64f;
-        float newHeight = texture.getHeight() - time*300*0.36f;
-
         this.batch.draw(texture,
-                GameController.getInstance().getPlayer().getSpriteCenter().x - newWidth/2,
-                GameController.getInstance().getPlayer().getSpriteCenter().y - newHeight/2,
-                newWidth,
-                newHeight
+                GameController.getInstance().getPlayer().getSpriteCenter().x - this.width/2,
+                GameController.getInstance().getPlayer().getSpriteCenter().y - this.height/2,
+                this.width,
+                this.height
                 );
 
-//        sprite.setSize(texture.getWidth() - time*100, texture.getHeight() - time*100);
+    }
 
-        time+= Gdx.graphics.getDeltaTime();
+    // size - 1-1000;
+    public void changeMaskedCircle(int size){
+        if(size > 1000 || size < 0)
+            throw new RuntimeException("Size of circle more than 1000 or less than 0");
+
+        this.size = size;
+        this.width = texture.getWidth() - (1000-size) * deltaWidth;
+        this.height = texture.getHeight() - (1000-size) * deltaHeight;
     }
 
     public Pixmap pixmapMask(Pixmap pixmap, Pixmap mask, boolean invertMaskAlpha){
@@ -90,22 +112,16 @@ public class MaskedCircle {
         int pixmapWidth = pixmap.getWidth();
         int pixmapHeight = pixmap.getHeight();
 
-//        Pixmap result = new Pixmap(pixmap.getWidth(), pixmap.getHeight(), pixmap.getFormat());
         Pixmap.Blending blending = pixmap.getBlending();
         pixmap.setBlending(Pixmap.Blending.None);
-
         for (int x=0; x<pixmapWidth; x++){
             for (int y=0; y<pixmapHeight; y++){
                 if(mask.getPixel(x, y) == 255){
                     pixmap.setColor(0, 0, 0, 0);
                     pixmap.drawPixel(x, y );
                 }
-                if(mask.getPixel(x, y) == 255){
-                    System.out.println();
-                }
             }
         }
-
         pixmap.setBlending(blending);
         return pixmap;
     }
