@@ -21,6 +21,7 @@ public class Ghost extends Unit {
     Circle hitbox;
 
     float speed;
+    float minSpeed = 50;
 
     @Override
     public void init(Batch batch) {
@@ -30,8 +31,8 @@ public class Ghost extends Unit {
         this.XY.x = 800;
         this.XY.y = 200;
 
-        this.width = 300;
-        this.height = 300;
+        this.width = 200;
+        this.height = 200;
 
         this.texture = Game.getInstance().getAssetManager().get(Assets.ghostTexture);
         this.sprite = createScaledSprite(texture);
@@ -41,10 +42,10 @@ public class Ghost extends Unit {
 
 
 
-        this.speed = 50;
+        this.speed = minSpeed;
 
         this.hitboxCenter = new Vector2(XY.x + this.width/2, XY.y + this.height/2);
-        this.hitboxRadius = 100;
+        this.hitboxRadius = 60;
         this.hitbox = new Circle(hitboxCenter, hitboxRadius);
 
 
@@ -67,6 +68,8 @@ public class Ghost extends Unit {
         checkPlayerHover();
 
         this.sprite.draw(batch);
+
+        System.out.println(speed + "  " + minSpeed);
     }
 
     private void checkPlayerHover() {
@@ -89,7 +92,9 @@ public class Ghost extends Unit {
             this.speed -= Gdx.graphics.getDeltaTime() * 10;
         }
 
-        if(this.speed<50) this.speed = 50;
+        this.minSpeed += Gdx.graphics.getDeltaTime() ;
+
+        if(this.speed<minSpeed) this.speed = minSpeed;
 
     }
 
