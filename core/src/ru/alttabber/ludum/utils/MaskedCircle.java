@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,6 +30,8 @@ public class MaskedCircle {
     float maxHeight;
     float minHeight;
 
+    float alpha = 1;
+
     public void init(Batch batch){
 
         this.batch = batch;
@@ -47,9 +50,9 @@ public class MaskedCircle {
 
         sprite = new Sprite(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
-        maxWidth = Window.getWidth()*8;
+        maxWidth = Window.getWidth()*6;
         minWidth = Window.getWidth()*6/5;
-        maxHeight = Window.getHeight()*8;
+        maxHeight = Window.getHeight()*6;
         minHeight = Window.getHeight()*6/5;
         deltaWidth = (maxWidth - minWidth)/maxSize;
         deltaHeight = (maxHeight - minHeight)/maxSize;
@@ -61,14 +64,27 @@ public class MaskedCircle {
     public void draw(){
 
         changeMaskedCircle((int) ((Game.getInstance().getPlayer().getLampHp()/100f) * maxSize));
+        sprite.setAlpha(alpha);
+        sprite.setX(Game.getInstance().getPlayer().getSpriteCenter().x - this.width/2);
+        sprite.setY(Game.getInstance().getPlayer().getSpriteCenter().y - this.height/2);
+        sprite.setSize(this.width, this.height);
+        sprite.draw(batch);
 
-        this.batch.draw(texture,
-                Game.getInstance().getPlayer().getSpriteCenter().x - this.width/2,
-                Game.getInstance().getPlayer().getSpriteCenter().y - this.height/2,
-                this.width,
-                this.height
-                );
+        this.alpha += Gdx.graphics.getDeltaTime()/3;
+        setAlpha(this.alpha);
 
+//        this.batch.draw(sprite,
+//                ,
+//                Game.getInstance().getPlayer().getSpriteCenter().y - this.height/2,
+//                this.width,
+//                this.height
+//                );
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+        if(this.alpha < 0) this.alpha = 0;
+        if(this.alpha > 1) this.alpha = 1;
     }
 
     // size - 0-1000;
@@ -101,9 +117,6 @@ public class MaskedCircle {
                 pixelColor.a = pixelColor.a * maskPixelColor.a;                                     // multiply pixel alpha * mask alpha
                 result.setColor(pixelColor);
                 result.drawPixel(x, y);
-                if(mask.getPixel(x, y) == 255){
-                    System.out.println();
-                }
             }
         }
         pixmap.setBlending(blending);

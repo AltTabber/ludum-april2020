@@ -46,7 +46,6 @@ public class MapController {
                 if("".equals(elem) || "n".equalsIgnoreCase(elem)){
                     Wall wall = new Wall(blockWidth*j, blockHeight*i, blockHeight*(j+1), blockHeight*(i+1));
 
-                    System.out.println(i + "  " + j);
                     if(prevMapElements != null && !prevMapElements.get(j).equals("") && !prevMapElements.get(j).equalsIgnoreCase("n")){
                         wall.setWallTexture();
                     }

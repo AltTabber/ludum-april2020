@@ -28,6 +28,7 @@ public class CompassItem extends Item {
     @Override
     public void doMapAction() {
         Game.getInstance().getCompassUI().setAlpha(0.5f);
+        Game.getInstance().getSoundManager().playCompassSound();
         this.destroyItem();
     }
 }

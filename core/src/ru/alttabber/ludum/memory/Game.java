@@ -8,6 +8,8 @@ import ru.alttabber.ludum.ui.Camera;
 import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.utils.CollisionController;
 import ru.alttabber.ludum.utils.LevelController;
+import ru.alttabber.ludum.utils.MaskedCircle;
+import ru.alttabber.ludum.utils.SoundManager;
 
 public class Game {
 
@@ -19,6 +21,8 @@ public class Game {
     private Camera camera;
     private ExitState exitState;
     private CompassUI compassUI;
+    private SoundManager soundManager;
+    private MaskedCircle maskedCircle;
 
     private static Game instance;
 
@@ -85,5 +89,21 @@ public class Game {
 
     public CompassUI getCompassUI() {
         return compassUI;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
+
+    public void setSoundManager(SoundManager soundManager) {
+        this.soundManager = soundManager;
+    }
+
+    public MaskedCircle getMaskedCircle() {
+        return maskedCircle;
+    }
+
+    public void setMaskedCircle(MaskedCircle maskedCircle) {
+        this.maskedCircle = maskedCircle;
     }
 }

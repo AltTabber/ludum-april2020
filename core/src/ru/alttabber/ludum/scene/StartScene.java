@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.scene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,7 @@ import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.ui.MapController;
 import ru.alttabber.ludum.utils.MaskedCircle;
+import ru.alttabber.ludum.utils.SoundManager;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class StartScene extends Scene {
 
     MaskedCircle maskedCircle;
     MapController mapController;
+    SoundManager soundManager;
 
 
     public StartScene() {
@@ -43,6 +46,7 @@ public class StartScene extends Scene {
         Game.getInstance().getAssetController().loadPlayerAssets();
         Game.getInstance().getAssetController().loadItems();
         Game.getInstance().getAssetController().loadGhost();
+        Game.getInstance().getAssetController().loadSounds();
         Game.getInstance().getAssetManager().finishLoading();
 
         player = new Player();
@@ -90,6 +94,15 @@ public class StartScene extends Scene {
         compassUI.init(this.batch);
 
         Game.getInstance().setCompass(compassUI);
+
+        soundManager = new SoundManager();
+        soundManager.init();
+        soundManager.playWhiteNoise();
+        soundManager.setNoiseLevel(0);
+
+        Game.getInstance().setSoundManager(soundManager);
+        Game.getInstance().setMaskedCircle(maskedCircle);
+
     }
 
     @Override
@@ -130,6 +143,8 @@ public class StartScene extends Scene {
         }
 
         compassUI.draw();
+
+        soundManager.updateSounds();
 
 
         batch.end();

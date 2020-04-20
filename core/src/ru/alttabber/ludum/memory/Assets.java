@@ -87,4 +87,10 @@ public class Assets {
 
     public static final String map1Texture = "maps/map1.txt";
 
+    public static final String ghostNoise1 = "sound/white1.mp3";
+    public static final String ghostNoise2 = "sound/white2.mp3";
+    public static final String ghostNoise3 = "sound/white3.mp3";
+    public static final String lampOilSound = "sound/lampOil.mp3";
+    public static final String flareSound = "sound/flare.mp3";
+    public static final String compassSound = "sound/compass.mp3";
 }

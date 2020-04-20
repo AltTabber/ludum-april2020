@@ -53,11 +53,21 @@ public class AssetManagerController {
         assetManager.load(Assets.ghostOverlayTexture, Texture.class);
     }
 
+    public void loadSounds(){
+        assetManager.load(Assets.ghostNoise1, Sound.class);
+        assetManager.load(Assets.ghostNoise2, Sound.class);
+        assetManager.load(Assets.ghostNoise3, Sound.class);
+
+        assetManager.load(Assets.lampOilSound, Sound.class);
+        assetManager.load(Assets.flareSound, Sound.class);
+        assetManager.load(Assets.compassSound, Sound.class);
+    }
 
     private void loadAnimationArray(String[] array){
         for(String path: array){
             assetManager.load(path, Texture.class);
         }
     }
+
 }
 
