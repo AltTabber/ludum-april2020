@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.window.Window;
 
 public class MaskedCircle {
@@ -60,11 +60,11 @@ public class MaskedCircle {
 
     public void draw(){
 
-        changeMaskedCircle((int) ((GameController.getInstance().getPlayer().getLampHp()/100f) * maxSize));
+        changeMaskedCircle((int) ((Game.getInstance().getPlayer().getLampHp()/100f) * maxSize));
 
         this.batch.draw(texture,
-                GameController.getInstance().getPlayer().getSpriteCenter().x - this.width/2,
-                GameController.getInstance().getPlayer().getSpriteCenter().y - this.height/2,
+                Game.getInstance().getPlayer().getSpriteCenter().x - this.width/2,
+                Game.getInstance().getPlayer().getSpriteCenter().y - this.height/2,
                 this.width,
                 this.height
                 );

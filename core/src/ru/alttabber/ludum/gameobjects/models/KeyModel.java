@@ -2,7 +2,7 @@ package ru.alttabber.ludum.gameobjects.models;
 
 import com.badlogic.gdx.graphics.Texture;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class KeyModel {
 
@@ -11,7 +11,7 @@ public class KeyModel {
     public static KeyModel instance;
 
     private KeyModel() {
-        this.texture = GameController.getInstance().getAssetManager().get(Assets.keyTexture, Texture.class);
+        this.texture = Game.getInstance().getAssetManager().get(Assets.keyTexture, Texture.class);
     }
 
     public static KeyModel getInstance(){

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class WallModel {
 
@@ -20,7 +20,7 @@ public class WallModel {
         texture = new Texture(pixmap);
         pixmap.dispose();
 
-        wallTexture = GameController.getInstance().getAssetManager().get(Assets.wall, Texture.class);
+        wallTexture = Game.getInstance().getAssetManager().get(Assets.wall, Texture.class);
     }
 
     public static WallModel getInstance(){

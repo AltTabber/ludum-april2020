@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.ExitState;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.scene.GameOverScene;
 import ru.alttabber.ludum.window.Window;
 
@@ -33,8 +33,8 @@ public class Exit extends AutomaticUsableObject {
 
         this.rect = new Rectangle(XY.x, XY.y, this.width, this.height);
 
-        this.textureOpen = GameController.getInstance().getAssetManager().get(Assets.floorExitOpen);
-        this.textureClosed = GameController.getInstance().getAssetManager().get(Assets.floorExitClosed);
+        this.textureOpen = Game.getInstance().getAssetManager().get(Assets.floorExitOpen);
+        this.textureClosed = Game.getInstance().getAssetManager().get(Assets.floorExitClosed);
 
         this.spriteOpen = createScaledSprite(this.textureOpen);
         this.spriteClosed = createScaledSprite(this.textureClosed);
@@ -44,7 +44,7 @@ public class Exit extends AutomaticUsableObject {
     @Override
     public void draw() {
         super.draw();
-        if(GameController.getInstance().getExitState() == ExitState.EXIT_OPEN){
+        if(Game.getInstance().getExitState() == ExitState.EXIT_OPEN){
             this.spriteOpen.setPosition(XY.x, XY.y);
             this.spriteOpen.draw(batch);
         }else{
@@ -55,11 +55,11 @@ public class Exit extends AutomaticUsableObject {
 
     @Override
     public void doMapAction() {
-        if(GameController.getInstance().getExitState() == ExitState.EXIT_OPEN) {
-            GameOverScene level = (GameOverScene) GameController.getInstance().getLevelController().chooseLevel(GameOverScene.class);
+        if(Game.getInstance().getExitState() == ExitState.EXIT_OPEN) {
+            GameOverScene level = (GameOverScene) Game.getInstance().getLevelController().chooseLevel(GameOverScene.class);
             level.init(batch);
-            Player player = GameController.getInstance().getPlayer();
-            GameController.getInstance().getPlayer().setXY(Window.getWidth() - player.width, player.XY.y);
+            Player player = Game.getInstance().getPlayer();
+            Game.getInstance().getPlayer().setXY(Window.getWidth() - player.width, player.XY.y);
         }else{
             //Сообщение
         }

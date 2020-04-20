@@ -4,10 +4,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.scene.StartScene;
 import ru.alttabber.ludum.ui.UIOverlay;
-import ru.alttabber.ludum.utils.MaskedCircle;
 
 public class LudumRogue extends ApplicationAdapter {
 
@@ -21,7 +20,7 @@ public class LudumRogue extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		startScene = (StartScene) GameController.getInstance().getLevelController().chooseLevel(StartScene.class);
+		startScene = (StartScene) Game.getInstance().getLevelController().chooseLevel(StartScene.class);
 		startScene.init(batch);
 
 		this.ui = new UIOverlay();
@@ -36,7 +35,7 @@ public class LudumRogue extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-		GameController.getInstance().getLevelController().getCurrentLevel().draw();
+		Game.getInstance().getLevelController().getCurrentLevel().draw();
 
 
 

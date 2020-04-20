@@ -1,7 +1,7 @@
 package ru.alttabber.ludum.ui;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.window.Window;
 
 public class Camera {
@@ -18,7 +18,7 @@ public class Camera {
     }
 
     public void update(){
-        camera.position.set(GameController.getInstance().getPlayer().getSpriteCenter().x, GameController.getInstance().getPlayer().getSpriteCenter().y, 0);
+        camera.position.set(Game.getInstance().getPlayer().getSpriteCenter().x, Game.getInstance().getPlayer().getSpriteCenter().y, 0);
         camera.update();
     }
 

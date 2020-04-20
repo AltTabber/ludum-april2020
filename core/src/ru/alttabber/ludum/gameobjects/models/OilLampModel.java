@@ -2,7 +2,7 @@ package ru.alttabber.ludum.gameobjects.models;
 
 import com.badlogic.gdx.graphics.Texture;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class OilLampModel {
 
@@ -11,7 +11,7 @@ public class OilLampModel {
     public static OilLampModel instance;
 
     private OilLampModel() {
-        this.texture = GameController.getInstance().getAssetManager().get(Assets.oilTexture, Texture.class);
+        this.texture = Game.getInstance().getAssetManager().get(Assets.oilTexture, Texture.class);
     }
 
     public static OilLampModel getInstance(){

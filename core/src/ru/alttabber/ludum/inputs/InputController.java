@@ -2,7 +2,7 @@ package ru.alttabber.ludum.inputs;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.utils.UniqueArrayList;
 
 public class InputController implements InputProcessor {
@@ -41,7 +41,7 @@ public class InputController implements InputProcessor {
         setPlayerMovementInput();
 
         if(keycode == Input.Keys.Z){
-            GameController.getInstance().getPlayer().useItem();
+            Game.getInstance().getPlayer().useItem();
         }
 
         return false;

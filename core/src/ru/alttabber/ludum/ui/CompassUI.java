@@ -9,7 +9,7 @@ import ru.alttabber.ludum.gameobjects.Exit;
 import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.gameobjects.items.KeyItem;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class CompassUI extends GameObject {
 
@@ -30,8 +30,8 @@ public class CompassUI extends GameObject {
     public void init(Batch batch) {
         this.batch = batch;
 
-        arrowKeyTexture = GameController.getInstance().getAssetManager().get(Assets.arrowKey, Texture.class);
-        arrowExitTexture = GameController.getInstance().getAssetManager().get(Assets.arrowExit, Texture.class);
+        arrowKeyTexture = Game.getInstance().getAssetManager().get(Assets.arrowKey, Texture.class);
+        arrowExitTexture = Game.getInstance().getAssetManager().get(Assets.arrowExit, Texture.class);
 
         this.width = 60;
         this.height = 60;
@@ -49,27 +49,27 @@ public class CompassUI extends GameObject {
     public void draw() {
 
         setAlpha(alpha - Gdx.graphics.getDeltaTime() * alphaSpeed);
-        Vector2 key = GameController.getInstance().getCollisionController().getUsableObjectByClass(KeyItem.class);
+        Vector2 key = Game.getInstance().getCollisionController().getUsableObjectByClass(KeyItem.class);
 
         if (key != null) {
-            directionKey = GameController.getInstance().getPlayer().getSpriteCenter()
+            directionKey = Game.getInstance().getPlayer().getSpriteCenter()
                     .sub(key)
                     .nor().rotate90(1).rotate90(1);
-            arrowKey.setPosition(GameController.getInstance().getPlayer().getSpriteCenter().x + directionKey.x * radius,
-                    GameController.getInstance().getPlayer().getSpriteCenter().y + directionKey.y * radius);
+            arrowKey.setPosition(Game.getInstance().getPlayer().getSpriteCenter().x + directionKey.x * radius,
+                    Game.getInstance().getPlayer().getSpriteCenter().y + directionKey.y * radius);
             arrowKey.setOrigin(arrowKey.getWidth() / 2, arrowKey.getHeight() / 2);
             arrowKey.setRotation(directionKey.angle());
             arrowKey.draw(batch, alpha);
         }
 
 
-        Vector2 exit = GameController.getInstance().getCollisionController().getAutoUsableObjectByClass(Exit.class);
+        Vector2 exit = Game.getInstance().getCollisionController().getAutoUsableObjectByClass(Exit.class);
         if (exit != null) {
-            directionExit = GameController.getInstance().getPlayer().getSpriteCenter()
+            directionExit = Game.getInstance().getPlayer().getSpriteCenter()
                     .sub(exit)
                     .nor().rotate90(1).rotate90(1);
-            arrowExit.setPosition(GameController.getInstance().getPlayer().getSpriteCenter().x + directionExit.x * radius,
-                    GameController.getInstance().getPlayer().getSpriteCenter().y + directionExit.y * radius);
+            arrowExit.setPosition(Game.getInstance().getPlayer().getSpriteCenter().x + directionExit.x * radius,
+                    Game.getInstance().getPlayer().getSpriteCenter().y + directionExit.y * radius);
             arrowExit.setOrigin(arrowExit.getWidth() / 2, arrowExit.getHeight() / 2);
             arrowExit.setRotation(directionExit.angle());
             arrowExit.draw(batch, alpha);

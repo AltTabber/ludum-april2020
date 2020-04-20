@@ -2,7 +2,7 @@ package ru.alttabber.ludum.gameobjects.models;
 
 import com.badlogic.gdx.graphics.Texture;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class FlareGunModel {
 
@@ -11,7 +11,7 @@ public class FlareGunModel {
     public static FlareGunModel instance;
 
     private FlareGunModel() {
-        this.texture = GameController.getInstance().getAssetManager().get(Assets.flareGunTexture, Texture.class);
+        this.texture = Game.getInstance().getAssetManager().get(Assets.flareGunTexture, Texture.class);
     }
 
     public static FlareGunModel getInstance(){

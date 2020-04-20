@@ -2,10 +2,9 @@ package ru.alttabber.ludum.gameobjects.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import ru.alttabber.ludum.gameobjects.models.CompassModel;
 import ru.alttabber.ludum.gameobjects.models.KeyModel;
 import ru.alttabber.ludum.memory.ExitState;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class KeyItem extends Item {
 
@@ -32,6 +31,6 @@ public class KeyItem extends Item {
     @Override
     public void doMapAction() {
         super.doMapAction();
-        GameController.getInstance().setExitState(ExitState.EXIT_OPEN);
+        Game.getInstance().setExitState(ExitState.EXIT_OPEN);
     }
 }

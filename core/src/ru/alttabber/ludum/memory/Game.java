@@ -9,7 +9,7 @@ import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.utils.CollisionController;
 import ru.alttabber.ludum.utils.LevelController;
 
-public class GameController {
+public class Game {
 
     private AssetManagerController assetController;
     private InputController inputController;
@@ -20,9 +20,9 @@ public class GameController {
     private ExitState exitState;
     private CompassUI compassUI;
 
-    private static GameController instance;
+    private static Game instance;
 
-    private GameController() {
+    private Game() {
         this.assetController = new AssetManagerController();
         this.inputController = new InputController();
         Gdx.input.setInputProcessor(inputController);
@@ -32,9 +32,9 @@ public class GameController {
         this.exitState = ExitState.EXIT_CLOSED;
     }
 
-    public static GameController getInstance(){
+    public static Game getInstance(){
         if( instance == null){
-            instance = new GameController();
+            instance = new Game();
         }
         return instance;
     }

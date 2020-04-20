@@ -2,8 +2,7 @@ package ru.alttabber.ludum.scene;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.alttabber.ludum.gameobjects.Wall;
-import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.utils.CollisionController;
+import ru.alttabber.ludum.memory.Game;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public abstract class Scene {
     public abstract void draw();
 
     public void init(Batch batch){
-        GameController.getInstance().getCollisionController().clear();
+        Game.getInstance().getCollisionController().clear();
         this.batch = batch;
     }
 

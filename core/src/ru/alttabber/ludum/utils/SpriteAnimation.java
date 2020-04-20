@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import ru.alttabber.ludum.gameobjects.GameObject;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class SpriteAnimation extends GameObject {
         spriteList = new ArrayList<>();
 
         for(String assetPath: assets){
-            Texture texture = GameController.getInstance().getAssetManager().get(assetPath);
+            Texture texture = Game.getInstance().getAssetManager().get(assetPath);
             Sprite sprite = createScaledSprite(texture);
             spriteList.add(sprite);
         }

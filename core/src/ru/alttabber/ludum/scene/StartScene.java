@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
-import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.FlareGunItem;
 import ru.alttabber.ludum.gameobjects.items.OilLampItem;
@@ -13,7 +12,7 @@ import ru.alttabber.ludum.gameobjects.units.Ghost;
 import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.ui.MapController;
 import ru.alttabber.ludum.utils.MaskedCircle;
@@ -37,19 +36,19 @@ public class StartScene extends Scene {
 
     @Override
     public void init(Batch batch) {
-        GameController.getInstance().getCamera().init();
+        Game.getInstance().getCamera().init();
 
         super.init(new SpriteBatch());
 
-        GameController.getInstance().getAssetController().loadPlayerAssets();
-        GameController.getInstance().getAssetController().loadItems();
-        GameController.getInstance().getAssetController().loadGhost();
-        GameController.getInstance().getAssetManager().finishLoading();
+        Game.getInstance().getAssetController().loadPlayerAssets();
+        Game.getInstance().getAssetController().loadItems();
+        Game.getInstance().getAssetController().loadGhost();
+        Game.getInstance().getAssetManager().finishLoading();
 
         player = new Player();
         player.init(this.batch);
 
-        GameController.getInstance().setPlayer(player);
+        Game.getInstance().setPlayer(player);
 
 
 
@@ -74,8 +73,8 @@ public class StartScene extends Scene {
         flareGunItem.init(this.batch);
         flareGunItem.setXY(400, 200);
 
-        GameController.getInstance().getCollisionController().addUsableObject(oilLampItem);
-        GameController.getInstance().getCollisionController().addUsableObject(flareGunItem);
+        Game.getInstance().getCollisionController().addUsableObject(oilLampItem);
+        Game.getInstance().getCollisionController().addUsableObject(flareGunItem);
 
         maskedCircle = new MaskedCircle();
         maskedCircle.init(this.batch);
@@ -83,22 +82,22 @@ public class StartScene extends Scene {
         mapController = new MapController();
         mapController.init(this.batch);
 
-        GameController.getInstance().getCollisionController().addWalls(mapController.getWalls());
+        Game.getInstance().getCollisionController().addWalls(mapController.getWalls());
 
-        floor = GameController.getInstance().getAssetManager().get(Assets.floorTex, Texture.class);
+        floor = Game.getInstance().getAssetManager().get(Assets.floorTex, Texture.class);
 
         compassUI = new CompassUI();
         compassUI.init(this.batch);
 
-        GameController.getInstance().setCompass(compassUI);
+        Game.getInstance().setCompass(compassUI);
     }
 
     @Override
     public void draw() {
         batch.begin();
 
-        GameController.getInstance().getCamera().update();
-        batch.setProjectionMatrix(GameController.getInstance().getCamera().getCamera().combined);
+        Game.getInstance().getCamera().update();
+        batch.setProjectionMatrix(Game.getInstance().getCamera().getCamera().combined);
 
         for(int i = 0; i < 100; i++){
             for(int j = 0; j < 100; j++){
@@ -106,27 +105,27 @@ public class StartScene extends Scene {
             }
         }
 
-        for(Wall wall: GameController.getInstance().getCollisionController().getWalls()){
+        for(Wall wall: Game.getInstance().getCollisionController().getWalls()){
             wall.draw();
         }
 
-        for(Item obj: GameController.getInstance().getCollisionController().getUsableObjects()){
+        for(Item obj: Game.getInstance().getCollisionController().getUsableObjects()){
             obj.draw();
         }
 
-        for(AutomaticUsableObject obj: GameController.getInstance().getCollisionController().getAutoUseObjects()){
+        for(AutomaticUsableObject obj: Game.getInstance().getCollisionController().getAutoUseObjects()){
             obj.draw();
         }
 
         player.draw();
 
-        for(Ghost ghost : GameController.getInstance().getCollisionController().getEnemies()){
+        for(Ghost ghost : Game.getInstance().getCollisionController().getEnemies()){
             ghost.draw();
         }
 
         maskedCircle.draw();
 
-        for(Ghost ghost : GameController.getInstance().getCollisionController().getEnemies()){
+        for(Ghost ghost : Game.getInstance().getCollisionController().getEnemies()){
             ghost.drawOnOverlay();
         }
 

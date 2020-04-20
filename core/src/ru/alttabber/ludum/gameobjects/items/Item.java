@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.gameobjects.MapUsableObject;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class Item extends GameObject implements MapUsableObject {
 
@@ -24,7 +24,7 @@ public class Item extends GameObject implements MapUsableObject {
 
     @Override
     public void destroyItem() {
-        GameController.getInstance().getCollisionController().removeItem(this);
+        Game.getInstance().getCollisionController().removeItem(this);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Item extends GameObject implements MapUsableObject {
     }
 
     public void addToInventory(){
-        GameController.getInstance().getPlayer().getInventory().addItem(this);
+        Game.getInstance().getPlayer().getInventory().addItem(this);
         destroyItem();
     }
 

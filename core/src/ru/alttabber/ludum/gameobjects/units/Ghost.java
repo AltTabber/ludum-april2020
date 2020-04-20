@@ -5,9 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 
 public class Ghost extends Unit {
 
@@ -29,10 +28,10 @@ public class Ghost extends Unit {
         this.width = 300;
         this.height = 300;
 
-        this.texture = GameController.getInstance().getAssetManager().get(Assets.ghostTexture);
+        this.texture = Game.getInstance().getAssetManager().get(Assets.ghostTexture);
         this.sprite = createScaledSprite(texture);
 
-        this.textureOverlay = GameController.getInstance().getAssetManager().get(Assets.ghostOverlayTexture);
+        this.textureOverlay = Game.getInstance().getAssetManager().get(Assets.ghostOverlayTexture);
         this.spriteOverlay = createScaledSprite(textureOverlay);
 
         this.speed = 50;
@@ -41,7 +40,7 @@ public class Ghost extends Unit {
 
     @Override
     public void draw() {
-        Vector2 movementTarget = GameController.getInstance().getPlayer().getSpriteCenter();
+        Vector2 movementTarget = Game.getInstance().getPlayer().getSpriteCenter();
 
         Vector2 velocityVector = this.getSpriteCenter().sub(movementTarget).nor();
 

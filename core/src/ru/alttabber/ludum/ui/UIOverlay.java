@@ -1,14 +1,10 @@
 package ru.alttabber.ludum.ui;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import ru.alttabber.ludum.gameobjects.GameObject;
 import ru.alttabber.ludum.gameobjects.bars.BarManager;
-import ru.alttabber.ludum.gameobjects.bars.HitBar;
-import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.window.Window;
+import ru.alttabber.ludum.memory.Game;
 
 public class UIOverlay{
 
@@ -30,7 +26,7 @@ public class UIOverlay{
     public void draw() {
 
         batch.begin();
-        GameController.getInstance().getPlayer().getInventory().draw(batch);
+        Game.getInstance().getPlayer().getInventory().draw(batch);
         batch.end();
 
 

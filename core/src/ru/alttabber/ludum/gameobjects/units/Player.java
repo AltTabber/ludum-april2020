@@ -10,7 +10,7 @@ import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.inputs.PlayerInput;
 import ru.alttabber.ludum.memory.Assets;
-import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.ui.Inventory;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 
@@ -60,7 +60,7 @@ public class Player extends Unit {
 
     @Override
     public void init(Batch batch) {
-        footStep = GameController.getInstance().getAssetManager().get(Assets.footStep);
+        footStep = Game.getInstance().getAssetManager().get(Assets.footStep);
 
         this.XY.x = 400;
         this.XY.y = 400;
@@ -110,18 +110,18 @@ public class Player extends Unit {
 
     @Override
     public void draw() {
-        this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
+        this.input = Game.getInstance().getInputController().getCurrentPlayerInput();
         this.doActionByInput(this.input);
         refreshCollisionRect();
         float deltaTime = Gdx.graphics.getDeltaTime();
         nextXY.x = this.XY.x + speed * deltaTime* this.movementVector.x;
         nextXY.y = this.XY.y + speed * deltaTime * this.movementVector.y;
-        if(GameController.getInstance().getCollisionController().isMovementPossible(getCollisionCircleByCoord(nextXY))){
+        if(Game.getInstance().getCollisionController().isMovementPossible(getCollisionCircleByCoord(nextXY))){
             this.XY.x = this.nextXY.x;
             this.XY.y = this.nextXY.y;
         }
         AutomaticUsableObject autoUseObj =
-                GameController.getInstance().getCollisionController().getAutoUseObject(this.collisionCircle);
+                Game.getInstance().getCollisionController().getAutoUseObject(this.collisionCircle);
         if(autoUseObj != null){
             autoUseObj.doMapAction();
         }
@@ -250,7 +250,7 @@ public class Player extends Unit {
     }
 
     public void useItem() {
-        Item item = GameController.getInstance().getCollisionController().getUsableObject(collisionCircle);
+        Item item = Game.getInstance().getCollisionController().getUsableObject(collisionCircle);
         if(item != null) {
             item.doMapAction();
         }

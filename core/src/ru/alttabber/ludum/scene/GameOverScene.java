@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.utils.TextContainer;
 import ru.alttabber.ludum.window.Window;
 
