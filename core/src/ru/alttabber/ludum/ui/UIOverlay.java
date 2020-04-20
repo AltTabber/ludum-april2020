@@ -23,6 +23,8 @@ public class UIOverlay{
         shapeRenderer = new ShapeRenderer();
 
         batch = new SpriteBatch();
+
+
     }
 
     public void draw() {

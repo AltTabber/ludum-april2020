@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.models.CompassModel;
 import ru.alttabber.ludum.gameobjects.models.FlareGunModel;
+import ru.alttabber.ludum.memory.GameController;
 
 public class CompassItem extends Item {
 
@@ -27,6 +28,7 @@ public class CompassItem extends Item {
 
     @Override
     public void doMapAction() {
-        //TODO
+        GameController.getInstance().getCompassUI().setAlpha(0.5f);
+        this.destroyItem();
     }
 }

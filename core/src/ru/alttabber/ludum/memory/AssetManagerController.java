@@ -40,6 +40,12 @@ public class AssetManagerController {
 
         assetManager.load(Assets.floorExitOpen, Texture.class);
         assetManager.load(Assets.floorExitClosed, Texture.class);
+
+        assetManager.load(Assets.wall, Texture.class);
+        assetManager.load(Assets.floorTex, Texture.class);
+
+        assetManager.load(Assets.arrowKey, Texture.class);
+        assetManager.load(Assets.arrowExit, Texture.class);
     }
 
     public void loadGhost(){

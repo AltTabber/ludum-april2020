@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +18,7 @@ public class Wall extends GameObject {
     private float height;
 
     private Texture texture;
+    private Sprite sprite;
 
     public Wall(Vector2 XY, Vector2 XY2) {
         this(XY.x, XY.y, XY2.x, XY2.y);
@@ -31,7 +33,12 @@ public class Wall extends GameObject {
 
     @Override
     public void draw() {
-        batch.draw(texture, XY.x, XY.y, width, height);
+        if(sprite != null){
+            batch.draw(sprite, XY.x, XY.y, width, height);
+        }else{
+            batch.draw(texture, XY.x, XY.y, width, height);
+        }
+
     }
 
     @Override
@@ -43,6 +50,11 @@ public class Wall extends GameObject {
 
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    public void setWallTexture(){
+        texture = WallModel.getInstance().getWallTexture();
+        sprite = createScaledSprite(texture);
     }
 
 }

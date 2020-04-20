@@ -9,6 +9,7 @@ import ru.alttabber.ludum.memory.GameController;
 public class WallModel {
 
     private Texture texture;
+    private Texture wallTexture;
 
     public static WallModel instance;
 
@@ -18,6 +19,8 @@ public class WallModel {
         pixmap.fillRectangle(0, 0, 250, 250);
         texture = new Texture(pixmap);
         pixmap.dispose();
+
+        wallTexture = GameController.getInstance().getAssetManager().get(Assets.wall, Texture.class);
     }
 
     public static WallModel getInstance(){
@@ -29,6 +32,10 @@ public class WallModel {
 
     public Texture getTexture() {
         return texture;
+    }
+
+    public Texture getWallTexture() {
+        return wallTexture;
     }
 
 }

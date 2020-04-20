@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import ru.alttabber.ludum.inputs.InputController;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.ui.Camera;
+import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.utils.CollisionController;
 import ru.alttabber.ludum.utils.LevelController;
 
@@ -17,6 +18,7 @@ public class GameController {
     private LevelController levelController;
     private Camera camera;
     private ExitState exitState;
+    private CompassUI compassUI;
 
     private static GameController instance;
 
@@ -75,5 +77,13 @@ public class GameController {
 
     public void setExitState(ExitState exitState) {
         this.exitState = exitState;
+    }
+
+    public void setCompass(CompassUI compassUI) {
+        this.compassUI = compassUI;
+    }
+
+    public CompassUI getCompassUI() {
+        return compassUI;
     }
 }

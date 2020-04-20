@@ -2,6 +2,7 @@ package ru.alttabber.ludum.utils;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.Item;
@@ -94,5 +95,23 @@ public class CollisionController {
 
     public List<Ghost> getEnemies() {
         return enemies;
+    }
+
+    public Vector2 getUsableObjectByClass(Class<? extends Item> clazz) {
+        for(Item item : this.usableObjects){
+            if(clazz.equals(item.getClass())){
+                 return item.getXY();
+            }
+        }
+        return null;
+    }
+
+    public Vector2 getAutoUsableObjectByClass(Class<? extends AutomaticUsableObject> clazz) {
+        for(AutomaticUsableObject item : this.autoUseObjects){
+            if(clazz.equals(item.getClass())){
+                return item.getXY();
+            }
+        }
+        return null;
     }
 }

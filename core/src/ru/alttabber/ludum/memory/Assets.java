@@ -79,6 +79,11 @@ public class Assets {
 
     public static final String floorExitOpen = "floor/exit1.png";
     public static final String floorExitClosed = "floor/exit2.png";
+    public static final String wall = "floor/wall.png";
+    public static final String floorTex = "floor/floorTex.png";
+
+    public static final String arrowKey = "player/arrow.png";
+    public static final String arrowExit = "player/arrowExit.png";
 
     public static final String map1Texture = "maps/map1.txt";
 

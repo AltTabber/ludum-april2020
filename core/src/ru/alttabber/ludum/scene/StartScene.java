@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.scene;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -8,11 +9,12 @@ import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.FlareGunItem;
 import ru.alttabber.ludum.gameobjects.items.OilLampItem;
-import ru.alttabber.ludum.gameobjects.items.SwordItem;
 import ru.alttabber.ludum.gameobjects.units.Ghost;
 import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
+import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.ui.CompassUI;
 import ru.alttabber.ludum.ui.MapController;
 import ru.alttabber.ludum.utils.MaskedCircle;
 
@@ -23,6 +25,8 @@ public class StartScene extends Scene {
 
     Player player;
     Ghost ghost;
+    Texture floor;
+    CompassUI compassUI;
 
     MaskedCircle maskedCircle;
     MapController mapController;
@@ -81,7 +85,12 @@ public class StartScene extends Scene {
 
         GameController.getInstance().getCollisionController().addWalls(mapController.getWalls());
 
+        floor = GameController.getInstance().getAssetManager().get(Assets.floorTex, Texture.class);
 
+        compassUI = new CompassUI();
+        compassUI.init(this.batch);
+
+        GameController.getInstance().setCompass(compassUI);
     }
 
     @Override
@@ -91,7 +100,11 @@ public class StartScene extends Scene {
         GameController.getInstance().getCamera().update();
         batch.setProjectionMatrix(GameController.getInstance().getCamera().getCamera().combined);
 
-
+        for(int i = 0; i < 100; i++){
+            for(int j = 0; j < 100; j++){
+                batch.draw(floor, i * floor.getWidth(), j * floor.getHeight());
+            }
+        }
 
         for(Wall wall: GameController.getInstance().getCollisionController().getWalls()){
             wall.draw();
@@ -116,6 +129,9 @@ public class StartScene extends Scene {
         for(Ghost ghost : GameController.getInstance().getCollisionController().getEnemies()){
             ghost.drawOnOverlay();
         }
+
+        compassUI.draw();
+
 
         batch.end();
 

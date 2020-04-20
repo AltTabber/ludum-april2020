@@ -16,6 +16,7 @@ import ru.alttabber.ludum.memory.GameController;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MapController {
@@ -38,6 +39,7 @@ public class MapController {
         String[] lines = str.split("\n");
 
         walls = new ArrayList<>();
+        List<String> prevMapElements = null;
 
         for(int i = 0; i< lines.length; i++){
             String[] mapElements = lines[i].split("\\t");
@@ -45,6 +47,12 @@ public class MapController {
                 String elem = mapElements[j];
                 if("".equals(elem) || "n".equalsIgnoreCase(elem)){
                     Wall wall = new Wall(blockWidth*j, blockHeight*i, blockHeight*(j+1), blockHeight*(i+1));
+
+                    System.out.println(i + "  " + j);
+                    if(prevMapElements != null && !prevMapElements.get(j).equals("") && !prevMapElements.get(j).equalsIgnoreCase("n")){
+                        wall.setWallTexture();
+                    }
+
                     wall.init(batch);
                     walls.add(wall);
                 }else if("P".equals(elem)){
@@ -82,6 +90,7 @@ public class MapController {
                     GameController.getInstance().getCollisionController().addUsableObject(compassItem);
                 }
             }
+            prevMapElements = Arrays.asList(mapElements);
         }
 
     }

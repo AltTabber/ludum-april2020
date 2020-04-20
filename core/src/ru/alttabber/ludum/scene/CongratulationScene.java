@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ru.alttabber.ludum.gameobjects.items.SwordItem;
 import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
