@@ -3,6 +3,7 @@ package ru.alttabber.ludum.gameobjects.items;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.models.OilLampModel;
+import ru.alttabber.ludum.memory.GameController;
 
 public class OilLampItem extends Item {
 
@@ -24,5 +25,9 @@ public class OilLampItem extends Item {
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
     }
 
-
+    @Override
+    public void doMapAction() {
+        GameController.getInstance().getPlayer().addHp(30);
+        destroyItem();
+    }
 }

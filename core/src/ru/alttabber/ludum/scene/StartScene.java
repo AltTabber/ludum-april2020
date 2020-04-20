@@ -49,8 +49,8 @@ public class StartScene extends Scene {
 
 
 
-        this.ghost = new Ghost();
-        this.ghost.init(this.batch);
+//        this.ghost = new Ghost();
+//        this.ghost.init(this.batch);
 
         this.walls = new ArrayList<>();
         this.walls.add(new Wall(new Vector2(800, 100), new Vector2(900, 500)));
@@ -107,11 +107,15 @@ public class StartScene extends Scene {
 
         player.draw();
 
-        this.ghost.draw();
+        for(Ghost ghost : GameController.getInstance().getCollisionController().getEnemies()){
+            ghost.draw();
+        }
 
         maskedCircle.draw();
 
-        this.ghost.drawOnOverlay();
+        for(Ghost ghost : GameController.getInstance().getCollisionController().getEnemies()){
+            ghost.drawOnOverlay();
+        }
 
         batch.end();
 

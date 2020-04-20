@@ -2,7 +2,6 @@ package ru.alttabber.ludum.utils;
 
 import ru.alttabber.ludum.scene.GameOverScene;
 import ru.alttabber.ludum.scene.Scene;
-import ru.alttabber.ludum.scene.SecondScene;
 import ru.alttabber.ludum.scene.StartScene;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class LevelController {
     public LevelController() {
         this.scenes = new ArrayList<>();
         this.scenes.add(new StartScene());
-        this.scenes.add(new SecondScene());
         this.scenes.add(new GameOverScene());
     }
 

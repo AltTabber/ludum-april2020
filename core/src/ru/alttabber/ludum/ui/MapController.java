@@ -6,7 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.alttabber.ludum.gameobjects.Exit;
 import ru.alttabber.ludum.gameobjects.Teleport;
 import ru.alttabber.ludum.gameobjects.Wall;
+import ru.alttabber.ludum.gameobjects.items.CompassItem;
+import ru.alttabber.ludum.gameobjects.items.FlareGunItem;
 import ru.alttabber.ludum.gameobjects.items.KeyItem;
+import ru.alttabber.ludum.gameobjects.items.OilLampItem;
+import ru.alttabber.ludum.gameobjects.units.Ghost;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
 
@@ -55,6 +59,27 @@ public class MapController {
                     keyItem.init(batch);
                     keyItem.setXY(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
                     GameController.getInstance().getCollisionController().addUsableObject(keyItem);
+                }else if("G".equals(elem)){
+                    Ghost ghost = new Ghost();
+                    ghost.init(batch);
+                    ghost.getXY().x = blockWidth*j + blockWidth/2;
+                    ghost.getXY().y = blockHeight*i + blockHeight/2;
+                    GameController.getInstance().getCollisionController().addEnemy(ghost);
+                }else if("L".equals(elem)){
+                    OilLampItem oilLampItem = new OilLampItem();
+                    oilLampItem.init(batch);
+                    oilLampItem.setXY(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
+                    GameController.getInstance().getCollisionController().addUsableObject(oilLampItem);
+                }else if("R".equals(elem)) {
+                    FlareGunItem flareGunItem = new FlareGunItem();
+                    flareGunItem.init(batch);
+                    flareGunItem.setXY(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
+                    GameController.getInstance().getCollisionController().addUsableObject(flareGunItem);
+                }else if("C".equals(elem)) {
+                    CompassItem compassItem = new CompassItem();
+                    compassItem.init(batch);
+                    compassItem.setXY(blockWidth*j + blockWidth/2 , blockHeight*i + blockHeight/2);
+                    GameController.getInstance().getCollisionController().addUsableObject(compassItem);
                 }
             }
         }

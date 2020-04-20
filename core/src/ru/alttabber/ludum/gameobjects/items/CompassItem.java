@@ -24,4 +24,9 @@ public class CompassItem extends Item {
 
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
     }
+
+    @Override
+    public void doMapAction() {
+        //TODO
+    }
 }

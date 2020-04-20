@@ -78,7 +78,7 @@ public class Player extends Unit {
         this.downLeftAnimation = new SpriteAnimation(Assets.upLeftTextureAnimation, this.width, this.height);
 
         this.lampHp = 100;
-        this.lampHpDrain = 4;
+        this.lampHpDrain = 2;
 
 //        this.leftAnimation = new SpriteAnimation(Assets.rightTextureAnimation, this.width, this.height);
 //        this.leftAnimation.transformSprites(animationSprite -> {
@@ -131,7 +131,6 @@ public class Player extends Unit {
         this.input = PlayerInput.IDLE;
         this.addHp(-this.lampHpDrain * deltaTime);
 
-        System.out.println(this.getX() + ", " + this.getY());
     }
 
     public void doActionByInput(PlayerInput input){
@@ -282,5 +281,7 @@ public class Player extends Unit {
         this.lampHp += delta;
         if(this.lampHp < 0)
             this.lampHp = 0;
+        if(this.lampHp > 100)
+            this.lampHp = 100;
     }
 }

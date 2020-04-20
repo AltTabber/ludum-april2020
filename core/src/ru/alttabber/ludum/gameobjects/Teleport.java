@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
-import ru.alttabber.ludum.scene.SecondScene;
+import ru.alttabber.ludum.scene.CongratulationScene;
 import ru.alttabber.ludum.window.Window;
 
 public class Teleport extends AutomaticUsableObject {
@@ -45,7 +45,7 @@ public class Teleport extends AutomaticUsableObject {
 
     @Override
     public void doMapAction() {
-        SecondScene level = (SecondScene) GameController.getInstance().getLevelController().chooseLevel(SecondScene.class);
+        CongratulationScene level = (CongratulationScene) GameController.getInstance().getLevelController().chooseLevel(CongratulationScene.class);
         level.init(batch);
         Player player = GameController.getInstance().getPlayer();
         GameController.getInstance().getPlayer().setXY(Window.getWidth() - player.width, player.XY.y );

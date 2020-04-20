@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Intersector;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.Wall;
 import ru.alttabber.ludum.gameobjects.items.Item;
+import ru.alttabber.ludum.gameobjects.units.Ghost;
+import ru.alttabber.ludum.gameobjects.units.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +16,13 @@ public class CollisionController {
     private List<Wall> impassableObjects;
     private List<Item> usableObjects;
     private List<AutomaticUsableObject> autoUseObjects;
+    private List<Ghost> enemies;
 
     public CollisionController() {
         impassableObjects = new ArrayList<>();
         usableObjects = new ArrayList<>();
         autoUseObjects = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
 
     public void addWalls(List<Wall> walls){
@@ -82,5 +86,13 @@ public class CollisionController {
 
     public List<Wall> getWalls() {
         return impassableObjects;
+    }
+
+    public void addEnemy(Ghost ghost) {
+        enemies.add(ghost);
+    }
+
+    public List<Ghost> getEnemies() {
+        return enemies;
     }
 }

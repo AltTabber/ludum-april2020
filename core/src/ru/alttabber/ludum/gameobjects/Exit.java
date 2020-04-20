@@ -9,7 +9,6 @@ import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.ExitState;
 import ru.alttabber.ludum.memory.GameController;
 import ru.alttabber.ludum.scene.GameOverScene;
-import ru.alttabber.ludum.scene.SecondScene;
 import ru.alttabber.ludum.window.Window;
 
 public class Exit extends AutomaticUsableObject {
