@@ -25,10 +25,10 @@ public class CongratulationScene extends Scene {
 
         this.batch.begin();
         TextContainer.getLayout().setText(TextContainer.getHeaderLabelFont(), "Congratulation!");
-        TextContainer.getHeaderLabelFont().draw(this.batch, "Game Over!", Window.getWidth()/2 - TextContainer.getLayout().width/2, 500);
+        TextContainer.getHeaderLabelFont().draw(this.batch, "Congratulation!", Window.getWidth()/2 - TextContainer.getLayout().width/2, 500);
 
         TextContainer.getLayout().setText(TextContainer.getHeaderLabelFont(), "You escape and keep alive.");
-        TextContainer.getHeaderLabelFont().draw(this.batch, "Please restart game.", Window.getWidth()/2 - TextContainer.getLayout().width/2, 460);
+        TextContainer.getHeaderLabelFont().draw(this.batch, "You escape and keep alive.", Window.getWidth()/2 - TextContainer.getLayout().width/2, 460);
         this.batch.end();
 
     }

@@ -23,6 +23,8 @@ public class OilLampItem extends Item {
         this.XY.y = 200;
 
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
+
+        this.instruction = "Press Z to add oil";
     }
 
     @Override

@@ -26,6 +26,8 @@ public class KeyItem extends Item {
         this.XY.y = 600;
 
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
+
+        this.instruction = "Press Z";
     }
 
     @Override

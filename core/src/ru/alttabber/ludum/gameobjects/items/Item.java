@@ -15,6 +15,7 @@ public class Item extends GameObject implements MapUsableObject {
     protected Sprite spriteInventory;
     protected Sprite sprite;
     protected Rectangle rectangle;
+    protected String instruction;
 
     @Override
     public void doMapAction() {
@@ -70,5 +71,9 @@ public class Item extends GameObject implements MapUsableObject {
             this.spriteInventory.setY(y);
             this.spriteInventory.draw(batch);
         }
+    }
+
+    public String getInstruction() {
+        return this.instruction;
     }
 }

@@ -8,6 +8,7 @@ import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.ExitState;
 import ru.alttabber.ludum.memory.Game;
+import ru.alttabber.ludum.scene.CongratulationScene;
 import ru.alttabber.ludum.scene.GameOverScene;
 import ru.alttabber.ludum.window.Window;
 
@@ -56,12 +57,12 @@ public class Exit extends AutomaticUsableObject {
     @Override
     public void doMapAction() {
         if(Game.getInstance().getExitState() == ExitState.EXIT_OPEN) {
-            GameOverScene level = (GameOverScene) Game.getInstance().getLevelController().chooseLevel(GameOverScene.class);
+            CongratulationScene level = (CongratulationScene) Game.getInstance().getLevelController().chooseLevel(CongratulationScene.class);
             level.init(batch);
             Player player = Game.getInstance().getPlayer();
             Game.getInstance().getPlayer().setXY(Window.getWidth() - player.width, player.XY.y);
         }else{
-            //Сообщение
+            Game.getInstance().getPlayer().showInstruction("Closed");
         }
     }
 

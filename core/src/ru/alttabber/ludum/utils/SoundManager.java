@@ -106,7 +106,7 @@ public class SoundManager {
 
     public void updateSounds(){
         float enemyDistance = getMinEnemyDistance();
-        System.out.println(this.whiteNoiseLevel);
+//        System.out.println(this.whiteNoiseLevel);
         if(enemyDistance < minDistance){
             setNoiseLevel(whiteNoise_threshold4 * (enemyDistance - minDistance)/(maxDistance - minDistance));
         }else{

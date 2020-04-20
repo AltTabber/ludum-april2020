@@ -13,6 +13,8 @@ import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.ui.Inventory;
 import ru.alttabber.ludum.utils.SpriteAnimation;
+import ru.alttabber.ludum.utils.TextContainer;
+import ru.alttabber.ludum.window.Window;
 
 public class Player extends Unit {
 
@@ -49,6 +51,8 @@ public class Player extends Unit {
     int counter = 0;
     
     int speed = 300;
+
+    private String instruction;
 
     public Player() {
         super();
@@ -125,6 +129,12 @@ public class Player extends Unit {
         if(autoUseObj != null){
             autoUseObj.doMapAction();
         }
+
+        Item item = Game.getInstance().getCollisionController().getUsableObject(this.collisionCircle);
+        if(item != null){
+            showInstruction(item);
+        }
+
         sprite.setPosition(this.XY.x, this.XY.y);
         this.sprite.draw(batch);
 
@@ -283,5 +293,15 @@ public class Player extends Unit {
             this.lampHp = 0;
         if(this.lampHp > 100)
             this.lampHp = 100;
+    }
+
+    public void showInstruction(Item item) {
+        String instruction = item.getInstruction();
+        showInstruction(instruction);
+    }
+
+    public void showInstruction(String instruction) {
+        TextContainer.getLayout().setText(TextContainer.getInstructionFont(), instruction);
+        TextContainer.getInstructionFont().draw(this.batch, instruction, this.getSpriteCenter().x - TextContainer.getLayout().width/2, this.getSpriteCenter().y + 110);
     }
 }

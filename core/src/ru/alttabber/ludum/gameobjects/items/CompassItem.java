@@ -23,6 +23,8 @@ public class CompassItem extends Item {
         this.XY.y = 600;
 
         this.rectangle = new Rectangle(XY.x, XY.y, width, height);
+
+        this.instruction = "Press Z to show direction of key and exit.";
     }
 
     @Override
@@ -31,4 +33,5 @@ public class CompassItem extends Item {
         Game.getInstance().getSoundManager().playCompassSound();
         this.destroyItem();
     }
+
 }
