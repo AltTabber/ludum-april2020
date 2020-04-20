@@ -35,10 +35,10 @@ public class LudumRogue extends ApplicationAdapter {
 		Gdx.gl.glClearColor(50/255f, 50/255f, 50/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
+
 		GameController.getInstance().getLevelController().getCurrentLevel().draw();
 
-		batch.end();
+
 
 		this.ui.draw();
 

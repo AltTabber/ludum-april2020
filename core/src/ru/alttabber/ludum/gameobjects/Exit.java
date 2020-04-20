@@ -8,6 +8,7 @@ import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.ExitState;
 import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.scene.GameOverScene;
 import ru.alttabber.ludum.scene.SecondScene;
 import ru.alttabber.ludum.window.Window;
 
@@ -56,7 +57,7 @@ public class Exit extends AutomaticUsableObject {
     @Override
     public void doMapAction() {
         if(GameController.getInstance().getExitState() == ExitState.EXIT_OPEN) {
-            SecondScene level = (SecondScene) GameController.getInstance().getLevelController().chooseLevel(SecondScene.class);
+            GameOverScene level = (GameOverScene) GameController.getInstance().getLevelController().chooseLevel(GameOverScene.class);
             level.init(batch);
             Player player = GameController.getInstance().getPlayer();
             GameController.getInstance().getPlayer().setXY(Window.getWidth() - player.width, player.XY.y);

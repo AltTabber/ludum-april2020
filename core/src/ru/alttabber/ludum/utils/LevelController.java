@@ -1,5 +1,6 @@
 package ru.alttabber.ludum.utils;
 
+import ru.alttabber.ludum.scene.GameOverScene;
 import ru.alttabber.ludum.scene.Scene;
 import ru.alttabber.ludum.scene.SecondScene;
 import ru.alttabber.ludum.scene.StartScene;
@@ -16,6 +17,7 @@ public class LevelController {
         this.scenes = new ArrayList<>();
         this.scenes.add(new StartScene());
         this.scenes.add(new SecondScene());
+        this.scenes.add(new GameOverScene());
     }
 
     public Scene chooseLevel(Class<? extends Scene> sceneClass){

@@ -59,6 +59,8 @@ public class MaskedCircle {
 
     public void draw(){
 
+        changeMaskedCircle((int) ((GameController.getInstance().getPlayer().getLampHp()/100f) * 1000));
+
         this.batch.draw(texture,
                 GameController.getInstance().getPlayer().getSpriteCenter().x - this.width/2,
                 GameController.getInstance().getPlayer().getSpriteCenter().y - this.height/2,

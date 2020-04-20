@@ -5,6 +5,8 @@ import ru.alttabber.ludum.gameobjects.items.SwordItem;
 import ru.alttabber.ludum.gameobjects.items.Item;
 import ru.alttabber.ludum.gameobjects.units.Player;
 import ru.alttabber.ludum.memory.GameController;
+import ru.alttabber.ludum.utils.TextContainer;
+import ru.alttabber.ludum.window.Window;
 
 public class SecondScene extends Scene {
 
@@ -14,17 +16,14 @@ public class SecondScene extends Scene {
     @Override
     public void init(Batch batch) {
         super.init(batch);
-        player = GameController.getInstance().getPlayer();
 
-        swordItem = new SwordItem();
-        swordItem.init(batch);
+
 
     }
 
     @Override
     public void draw() {
-        this.player.draw();
-        this.swordItem.draw();
+
     }
 
 }

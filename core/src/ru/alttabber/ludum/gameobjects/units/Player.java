@@ -40,6 +40,8 @@ public class Player extends Unit {
     private Circle collisionCircle;
 
     private Vector2 movementVector;
+    private float lampHp;
+    private float lampHpDrain;
 
     float footStepTime = 1f;
     boolean nowGo = false;
@@ -75,6 +77,9 @@ public class Player extends Unit {
         this.upLeftAnimation = new SpriteAnimation(Assets.downLeftTextureAnimation, this.width, this.height);
         this.downLeftAnimation = new SpriteAnimation(Assets.upLeftTextureAnimation, this.width, this.height);
 
+        this.lampHp = 100;
+        this.lampHpDrain = 4;
+
 //        this.leftAnimation = new SpriteAnimation(Assets.rightTextureAnimation, this.width, this.height);
 //        this.leftAnimation.transformSprites(animationSprite -> {
 //            animationSprite.flip(true,false);
@@ -108,8 +113,9 @@ public class Player extends Unit {
         this.input = GameController.getInstance().getInputController().getCurrentPlayerInput();
         this.doActionByInput(this.input);
         refreshCollisionRect();
-        nextXY.x = this.XY.x + speed * Gdx.graphics.getDeltaTime() * this.movementVector.x;
-        nextXY.y = this.XY.y + speed * Gdx.graphics.getDeltaTime() * this.movementVector.y;
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        nextXY.x = this.XY.x + speed * deltaTime* this.movementVector.x;
+        nextXY.y = this.XY.y + speed * deltaTime * this.movementVector.y;
         if(GameController.getInstance().getCollisionController().isMovementPossible(getCollisionCircleByCoord(nextXY))){
             this.XY.x = this.nextXY.x;
             this.XY.y = this.nextXY.y;
@@ -123,6 +129,7 @@ public class Player extends Unit {
         this.sprite.draw(batch);
 
         this.input = PlayerInput.IDLE;
+        this.addHp(-this.lampHpDrain * deltaTime);
 
         System.out.println(this.getX() + ", " + this.getY());
     }
@@ -261,5 +268,19 @@ public class Player extends Unit {
         this.nextXY.x = XY.x;
         this.nextXY.y = XY.y;
         refreshCollisionRect();
+    }
+
+    public float getLampHp() {
+        return lampHp;
+    }
+
+    public void setLampHp(float lampHp) {
+        this.lampHp = lampHp;
+    }
+
+    public void addHp(float delta){
+        this.lampHp += delta;
+        if(this.lampHp < 0)
+            this.lampHp = 0;
     }
 }

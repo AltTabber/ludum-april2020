@@ -17,8 +17,8 @@ public class UIOverlay{
     Batch batch;
 
     public void init() {
-        barManager = new BarManager();
-        barManager.addNewBar(new HitBar(GameController.getInstance().getPlayer().getHits()));
+//        barManager = new BarManager();
+//        barManager.addNewBar(new HitBar(GameController.getInstance().getPlayer().getHits()));
         //barManager.addNewBar(new ManaBar());
         shapeRenderer = new ShapeRenderer();
 

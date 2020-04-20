@@ -1,6 +1,7 @@
 package ru.alttabber.ludum.scene;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.gameobjects.AutomaticUsableObject;
 import ru.alttabber.ludum.gameobjects.Teleport;
@@ -34,7 +35,7 @@ public class StartScene extends Scene {
     public void init(Batch batch) {
         GameController.getInstance().getCamera().init();
 
-        super.init(batch);
+        super.init(new SpriteBatch());
 
         GameController.getInstance().getAssetController().loadPlayerAssets();
         GameController.getInstance().getAssetController().loadItems();
@@ -42,14 +43,14 @@ public class StartScene extends Scene {
         GameController.getInstance().getAssetManager().finishLoading();
 
         player = new Player();
-        player.init(batch);
+        player.init(this.batch);
 
         GameController.getInstance().setPlayer(player);
 
 
 
         this.ghost = new Ghost();
-        this.ghost.init(batch);
+        this.ghost.init(this.batch);
 
         this.walls = new ArrayList<>();
         this.walls.add(new Wall(new Vector2(800, 100), new Vector2(900, 500)));
@@ -62,21 +63,21 @@ public class StartScene extends Scene {
 
 
         OilLampItem oilLampItem = new OilLampItem();
-        oilLampItem.init(batch);
+        oilLampItem.init(this.batch);
         oilLampItem.setXY(200, 200);
 
         FlareGunItem flareGunItem = new FlareGunItem();
-        flareGunItem.init(batch);
+        flareGunItem.init(this.batch);
         flareGunItem.setXY(400, 200);
 
         GameController.getInstance().getCollisionController().addUsableObject(oilLampItem);
         GameController.getInstance().getCollisionController().addUsableObject(flareGunItem);
 
         maskedCircle = new MaskedCircle();
-        maskedCircle.init(batch);
+        maskedCircle.init(this.batch);
 
         mapController = new MapController();
-        mapController.init(batch);
+        mapController.init(this.batch);
 
         GameController.getInstance().getCollisionController().addWalls(mapController.getWalls());
 
@@ -85,6 +86,7 @@ public class StartScene extends Scene {
 
     @Override
     public void draw() {
+        batch.begin();
 
         GameController.getInstance().getCamera().update();
         batch.setProjectionMatrix(GameController.getInstance().getCamera().getCamera().combined);
@@ -111,6 +113,7 @@ public class StartScene extends Scene {
 
         this.ghost.drawOnOverlay();
 
+        batch.end();
 
     }
 }
