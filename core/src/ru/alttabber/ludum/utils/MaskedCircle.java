@@ -13,9 +13,11 @@ public class MaskedCircle {
 
     Pixmap resultedPixmap;
     Texture texture;
+    Texture blackRectangle;
     Batch batch;
 
     Sprite sprite;
+    Sprite blackRectangleSprite;
 
     int size = 1000;
     int maxSize = 1000;
@@ -47,6 +49,7 @@ public class MaskedCircle {
         resultedPixmap = createMask(pixmap, mask);
         texture = new Texture(resultedPixmap);
         pixmap.dispose();
+        mask.dispose();
 
         sprite = new Sprite(texture, 0, 0, texture.getWidth(), texture.getHeight());
 
@@ -56,6 +59,15 @@ public class MaskedCircle {
         minHeight = Window.getHeight()*6/5;
         deltaWidth = (maxWidth - minWidth)/maxSize;
         deltaHeight = (maxHeight - minHeight)/maxSize;
+
+        pixmap = new Pixmap(Window.getWidth(), Window.getHeight(), Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.BLACK);
+        pixmap.fill();
+        blackRectangle = new Texture(pixmap);
+        pixmap.dispose();
+
+        blackRectangleSprite = new Sprite(texture, 0, 0, Window.getWidth(), Window.getHeight());
+
 
         changeMaskedCircle(size);
 
@@ -69,6 +81,11 @@ public class MaskedCircle {
         sprite.setY(Game.getInstance().getPlayer().getSpriteCenter().y - this.height/2);
         sprite.setSize(this.width, this.height);
         sprite.draw(batch);
+
+        blackRectangleSprite.setX(Game.getInstance().getPlayer().getSpriteCenter().x - this.blackRectangle.getWidth()/2);
+        blackRectangleSprite.setY(Game.getInstance().getPlayer().getSpriteCenter().y - this.blackRectangle.getHeight()/2);
+        blackRectangleSprite.setAlpha((100 - Game.getInstance().getPlayer().getHp())/100);
+        blackRectangleSprite.draw(batch);
 
         this.alpha += Gdx.graphics.getDeltaTime()/3;
         setAlpha(this.alpha);

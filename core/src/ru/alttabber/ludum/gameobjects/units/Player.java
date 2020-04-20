@@ -14,7 +14,6 @@ import ru.alttabber.ludum.memory.Game;
 import ru.alttabber.ludum.ui.Inventory;
 import ru.alttabber.ludum.utils.SpriteAnimation;
 import ru.alttabber.ludum.utils.TextContainer;
-import ru.alttabber.ludum.window.Window;
 
 public class Player extends Unit {
 
@@ -44,6 +43,9 @@ public class Player extends Unit {
     private Vector2 movementVector;
     private float lampHp;
     private float lampHpDrain;
+
+    private float hp;
+    private float hpDrain;
 
     float footStepTime = 1f;
     boolean nowGo = false;
@@ -83,6 +85,9 @@ public class Player extends Unit {
 
         this.lampHp = 100;
         this.lampHpDrain = 2;
+
+        this.hp = 100;
+        this.hpDrain = 10;
 
 //        this.leftAnimation = new SpriteAnimation(Assets.rightTextureAnimation, this.width, this.height);
 //        this.leftAnimation.transformSprites(animationSprite -> {
@@ -139,7 +144,10 @@ public class Player extends Unit {
         this.sprite.draw(batch);
 
         this.input = PlayerInput.IDLE;
-        this.addHp(-this.lampHpDrain * deltaTime);
+        this.addLampHp(-this.lampHpDrain * deltaTime);
+        if(this.lampHp == 0)
+            this.addHp(-this.hpDrain * deltaTime);
+
 
     }
 
@@ -283,16 +291,32 @@ public class Player extends Unit {
         return lampHp;
     }
 
+    public float getHp() {
+        return hp;
+    }
+
     public void setLampHp(float lampHp) {
         this.lampHp = lampHp;
     }
 
-    public void addHp(float delta){
+    public void addLampHp(float delta){
         this.lampHp += delta;
         if(this.lampHp < 0)
             this.lampHp = 0;
         if(this.lampHp > 100)
             this.lampHp = 100;
+    }
+
+    public void addHp(float delta){
+        this.hp += delta;
+        if(this.hp < 0)
+            this.hp = 0;
+        if(this.hp > 100)
+            this.hp = 100;
+    }
+
+    public boolean isDead(){
+        return this.hp == 0;
     }
 
     public void showInstruction(Item item) {

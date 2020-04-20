@@ -27,8 +27,8 @@ public class GameOverScene extends Scene {
         TextContainer.getLayout().setText(TextContainer.getHeaderLabelFont(), "Game Over!");
         TextContainer.getHeaderLabelFont().draw(this.batch, "Game Over!", Window.getWidth()/2 - TextContainer.getLayout().width/2, 500);
 
-        TextContainer.getLayout().setText(TextContainer.getHeaderLabelFont(), "Please restart game.");
-        TextContainer.getHeaderLabelFont().draw(this.batch, "Please restart game.", Window.getWidth()/2 - TextContainer.getLayout().width/2, 460);
+        TextContainer.getLayout().setText(TextContainer.getHeaderLabelFont(), "Please restart game, if you wanna try again.");
+        TextContainer.getHeaderLabelFont().draw(this.batch, "Please restart game, if you wanna try again.", Window.getWidth()/2 - TextContainer.getLayout().width/2, 460);
         this.batch.end();
     }
 }

@@ -146,6 +146,9 @@ public class StartScene extends Scene {
 
         soundManager.updateSounds();
 
+        if(Game.getInstance().getPlayer().isDead()){
+            Game.getInstance().getLevelController().chooseLevel(GameOverScene.class).init(batch);
+        }
 
         batch.end();
 

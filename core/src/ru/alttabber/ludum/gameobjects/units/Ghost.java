@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.Game;
@@ -14,6 +15,10 @@ public class Ghost extends Unit {
     Texture textureOverlay;
     Sprite sprite;
     Sprite spriteOverlay;
+
+    float hitboxRadius;
+    Vector2 hitboxCenter;
+    Circle hitbox;
 
     float speed;
 
@@ -34,7 +39,14 @@ public class Ghost extends Unit {
         this.textureOverlay = Game.getInstance().getAssetManager().get(Assets.ghostOverlayTexture);
         this.spriteOverlay = createScaledSprite(textureOverlay);
 
+
+
         this.speed = 50;
+
+        this.hitboxCenter = new Vector2(XY.x + this.width/2, XY.y + this.height/2);
+        this.hitboxRadius = 100;
+        this.hitbox = new Circle(hitboxCenter, hitboxRadius);
+
 
     }
 
@@ -48,12 +60,44 @@ public class Ghost extends Unit {
                 -1 * velocityVector.y * this.speed * Gdx.graphics.getDeltaTime());
 
         this.sprite.setPosition(this.XY.x, this.XY.y);
+
+        setHitBox();
+        deltaSpeed();
+
+        checkPlayerHover();
+
         this.sprite.draw(batch);
+    }
+
+    private void checkPlayerHover() {
+        Player player = Game.getInstance().getPlayer();
+        Circle playerCircle = Game.getInstance().getPlayer().getCollisionCircle();
+        if(this.hitbox.overlaps(playerCircle)){
+            player.addHp(-100);
+        }
     }
 
     public void drawOnOverlay() {
         this.spriteOverlay.setPosition(this.XY.x, this.XY.y);
         this.spriteOverlay.draw(batch);
     }
+
+    public void deltaSpeed(){
+        if(Game.getInstance().getPlayer().getLampHp() < 30) {
+            this.speed += Gdx.graphics.getDeltaTime() * 10;
+        } else {
+            this.speed -= Gdx.graphics.getDeltaTime() * 10;
+        }
+
+        if(this.speed<50) this.speed = 50;
+
+    }
+
+    public void setHitBox(){
+        this.hitboxCenter.set(XY.x + this.width/2, XY.y + this.height/2);
+        this.hitbox.setPosition(this.hitboxCenter);
+    }
+
+
 
 }

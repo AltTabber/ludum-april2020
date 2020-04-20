@@ -30,7 +30,7 @@ public class FlareGunItem extends Item {
 
     @Override
     public void doMapAction() {
-        Game.getInstance().getPlayer().addHp(10);
+        Game.getInstance().getPlayer().addLampHp(10);
         Game.getInstance().getMaskedCircle().setAlpha(0);
         Game.getInstance().getSoundManager().playFlareSound();
         destroyItem();

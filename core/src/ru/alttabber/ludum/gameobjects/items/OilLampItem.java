@@ -29,7 +29,7 @@ public class OilLampItem extends Item {
 
     @Override
     public void doMapAction() {
-        Game.getInstance().getPlayer().addHp(30);
+        Game.getInstance().getPlayer().addLampHp(30);
         Game.getInstance().getSoundManager().playLampOilSound();
         destroyItem();
     }
