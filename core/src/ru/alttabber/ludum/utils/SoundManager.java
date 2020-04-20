@@ -1,9 +1,14 @@
 package ru.alttabber.ludum.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import ru.alttabber.ludum.gameobjects.units.Unit;
 import ru.alttabber.ludum.memory.Assets;
 import ru.alttabber.ludum.memory.Game;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class SoundManager {
 
@@ -37,6 +42,19 @@ public class SoundManager {
     long whiteNoise2_id;
     long whiteNoise3_id;
 
+    Sound randomNoise1;
+    Sound randomNoise2;
+    Sound randomNoise3;
+    Sound randomNoise4;
+    Sound randomNoise5;
+
+    float[] randomNoise_volumes = {0.3f, 0.3f, 0.1f, 0.3f, 0.3f};
+
+    float minTime = 5;
+    float nextDelay = 5;
+
+    List<Sound> randomNoises = new ArrayList<>();
+
     public void init(){
         whiteNoise1 = Game.getInstance().getAssetManager().get(Assets.ghostNoise1, Sound.class);
         whiteNoise2 = Game.getInstance().getAssetManager().get(Assets.ghostNoise2, Sound.class);
@@ -45,6 +63,18 @@ public class SoundManager {
         lampOilSound = Game.getInstance().getAssetManager().get(Assets.lampOilSound, Sound.class);
         flareSound = Game.getInstance().getAssetManager().get(Assets.flareSound, Sound.class);
         compassSound = Game.getInstance().getAssetManager().get(Assets.compassSound, Sound.class);
+
+        randomNoise1 = Game.getInstance().getAssetManager().get(Assets.randomNoise1, Sound.class);
+        randomNoise2 = Game.getInstance().getAssetManager().get(Assets.randomNoise2, Sound.class);
+        randomNoise3 = Game.getInstance().getAssetManager().get(Assets.randomNoise3, Sound.class);
+        randomNoise4 = Game.getInstance().getAssetManager().get(Assets.randomNoise4, Sound.class);
+        randomNoise5 = Game.getInstance().getAssetManager().get(Assets.randomNoise5, Sound.class);
+
+        randomNoises.add(randomNoise1);
+        randomNoises.add(randomNoise2);
+        randomNoises.add(randomNoise3);
+        randomNoises.add(randomNoise4);
+        randomNoises.add(randomNoise5);
     }
 
     public void playWhiteNoise(){
@@ -82,7 +112,11 @@ public class SoundManager {
         }else{
             setNoiseLevel(0);
         }
-
+        nextDelay -= Gdx.graphics.getDeltaTime();
+        if(nextDelay <= 0){
+            playRandomNoise();
+            nextDelay = minTime + new Random().nextFloat()*5;
+        }
     }
 
     public float getMinEnemyDistance(){
@@ -106,6 +140,12 @@ public class SoundManager {
 
     public void playCompassSound(){
         compassSound.play(0.5f);
+    }
+
+    public void playRandomNoise(){
+        Random rnd = new Random();
+        int soundNumber = rnd.nextInt(randomNoises.size());
+        randomNoises.get(soundNumber).play(randomNoise_volumes[soundNumber]);
     }
 
 }

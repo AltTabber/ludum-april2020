@@ -61,6 +61,12 @@ public class AssetManagerController {
         assetManager.load(Assets.lampOilSound, Sound.class);
         assetManager.load(Assets.flareSound, Sound.class);
         assetManager.load(Assets.compassSound, Sound.class);
+
+        assetManager.load(Assets.randomNoise1, Sound.class);
+        assetManager.load(Assets.randomNoise2, Sound.class);
+        assetManager.load(Assets.randomNoise3, Sound.class);
+        assetManager.load(Assets.randomNoise4, Sound.class);
+        assetManager.load(Assets.randomNoise5, Sound.class);
     }
 
     private void loadAnimationArray(String[] array){

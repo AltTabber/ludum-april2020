@@ -93,4 +93,10 @@ public class Assets {
     public static final String lampOilSound = "sound/lampOil.mp3";
     public static final String flareSound = "sound/flare.mp3";
     public static final String compassSound = "sound/compass.mp3";
+
+    public static final String randomNoise1 = "sound/randomNoise1.mp3";
+    public static final String randomNoise2 = "sound/randomNoise2.mp3";
+    public static final String randomNoise3 = "sound/randomNoise3.mp3";
+    public static final String randomNoise4 = "sound/randomNoise4.mp3";
+    public static final String randomNoise5 = "sound/randomNoise5.mp3";
 }
