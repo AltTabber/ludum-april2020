@@ -3,8 +3,8 @@ N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N
 N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N
 N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N
 N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N
-					F	F	F	F	F	F	F		F	F	F	F	F	F	F		F	F	F	F	C		F	L	F	N	N	N	N	N	N   N
-					R		F	F	F	F	F		F	F	F	C	F	F	F		F		F				F		F	N	N	N	N	N	N   N
+					F	F	F	F	F	F	F	F	F	F	F	F	F	F	F		F	F	F	L	C		F	L	F	N	N	N	N	N	N   N
+					R		F	F	F	L	F		F	F	F	C	F	F	F		F		F				F		F	N	N	N	N	N	N   N
 					F	F	F	F	F	F	F		F	F	F	F	F	F	F		F		F	F	F	F	F		F	F	F	N	N	N	N	N
 									F	F	F		F	L	F	F	F	F	F		F										F	N	N	N	N	N
 					F	F	F		F	F	F		F	F	F	F	F	F	F	F	F		F	F	F	F	F	F	F		F	N	N	N	N	N
@@ -25,7 +25,7 @@ N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N	N
 					F	F	F	F	F		F	F	F	F	F	F	F		F		F	F	F	L	F	F	F   N	N	N	N	N	N	N	N	N
 					F	F	F	F	F		F	F	F	F	F	F	F		R		F	F	F	F	F	F	F	F	F	F	F	N	N	N	N	N
 					F				F								F		F				F	F	F	F	F				F	N	N	N	N	N
-					F	F	F	F	F	F	F	F	F		F	F	F		F	F	F		F	F	F	C	F				F	N	N	N	N	N
+					F	F	F	F	F	F	F	F	F		F	F	F		F	F	F		F	F	F	F	F				F	N	N	N	N	N
 									F	F	F	F	F		F						F		F	F	F	F	F				F	N	N	N	N	N
 					F	F	F		F	F	F	F	F		F	F	F	F	F	F	F		F	F	F	F	F				F	N	N	N	N	N
 					F	F	F		F							F															F	N	N	N	N	N
